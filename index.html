@@ -1,2086 +1,2055 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Zoovi — Rezerwuj usługi dla pupila w jednym miejscu</title>
     <meta
-      name="description"
-      content="Zoovi to intuicyjna aplikacja do szybkiego rezerwowania wizyt u weterynarza, groomera i opiekuna. Zweryfikowani specjaliści, przejrzyste ceny i przypomnienia."
+            name="description"
+            content="Zoovi to intuicyjna aplikacja do szybkiego rezerwowania wizyt u weterynarza, groomera i opiekuna. Zweryfikowani specjaliści, przejrzyste ceny i przypomnienia."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Comfortaa:wght@300..700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Comfortaa:wght@300..700&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
     />
 
-    
+
     <style>
-      :root {
-        --primary: #13a38b;
-        --primary-600: #0e7f6b;
-        --accent: #f4c14e;
-        --bg: #f5fbfa;
-        --text: #0e2e2f;
-        --muted: #64748b;
-        --line: #e2e8f0;
-        --surface: #ffffff;
-        --shadow: 0 10px 30px rgba(19, 163, 139, 0.12);
-        --radius: 16px;
-        --radius-md: 12px;
-        --radius-sm: 10px;
-        --container: 1200px;
-        --color-neutral: #6e7881;
-      }
-      /* Reset & base */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-      }
+        :root {
+            --primary: #13a38b;
+            --primary-600: #0e7f6b;
+            --accent: #f4c14e;
+            --bg: #f5fbfa;
+            --text: #0e2e2f;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --surface: #ffffff;
+            --shadow: 0 10px 30px rgba(19, 163, 139, 0.12);
+            --radius: 16px;
+            --radius-md: 12px;
+            --radius-sm: 10px;
+            --container: 1200px;
+            --color-neutral: #6e7881;
+        }
 
-      /* === Base utilities === */
-      .grid {
-        display: grid;
-      }
-      .flex {
-        display: flex;
-      }
-      .flex-col {
-        flex-direction: column;
-      }
-      .items-center {
-        align-items: center;
-      }
-      .text-center {
-        text-align: center;
-      }
+        /* Reset & base */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-      /* Gap (Tailwind spacing scale: 1 = 0.25rem = 4px) */
-      .gap-8 {
-        gap: 2rem;
-      } /* 32px */
-      .gap-24 {
-        gap: 6rem;
-      } /* 96px */
-
-      /* Width / Height (same spacing scale) */
-      .w-100 {
-        width: 25rem;
-      } /* 400px */
-      .h-100 {
-        height: 25rem;
-      } /* 400px */
-      .w-130 {
-        width: 32.5rem;
-      } /* 520px */
-      .h-130 {
-        height: 32.5rem;
-      } /* 520px */
-      .w-250 {
-        width: 62.5rem;
-      } /* 1000px */
-
-      /* Grid columns */
-      .grid-cols-1 {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-      }
-      .grid-cols-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      /* === Responsive variants (Tailwind default screens) === */
-      /* sm ≥ 640px */
-      @media (min-width: 640px) {
-        .sm\:gap-60 {
-          gap: 15rem;
-        } /* 240px */
-        .sm\:grid-cols-2 {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        .sm\:w-130 {
-          width: 32.5rem;
-        } /* 520px */
-        .sm\:h-130 {
-          height: 32.5rem;
-        } /* 520px */
-      }
-
-      /* lg ≥ 1024px */
-      @media (min-width: 1024px) {
-        .lg\:grid-cols-2 {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      /* xl ≥ 1280px */
-      @media (min-width: 1280px) {
-        .xl\:grid-cols-4 {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-      }
-
-      /* 2xl ≥ 1536px  (note the escaped leading digit in the selector) */
-      @media (min-width: 1536px) {
-        .\32 xl\:gap-140 {
-          gap: 35rem;
-        } /* 560px */
-      }
-
-      /* ############################## */
-
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
-          Helvetica, Arial, sans-serif;
-        color: var(--text);
-        background: radial-gradient(
-            1200px 800px at 10% -10%,
-            rgba(19, 163, 139, 0.1),
-            transparent 60%
-          ),
-          radial-gradient(
-            900px 700px at 110% 10%,
-            rgba(244, 193, 78, 0.12),
-            transparent 60%
-          ),
-          var(--bg);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-      }
-      .text-neutral {
-        color: var(--color-neutral);
-      }
-      .heading2B {
-        font-size: 24px;
-        font-weight: 500;
-      }
-      h1,
-      h2,
-      h3 {
-        font-family: Fredoka, Inter, system-ui, -apple-system, Segoe UI, Roboto,
-          Helvetica, Arial, sans-serif;
-        line-height: 1.15;
-        margin: 0 0 0.5rem;
-        color: #0f172a;
-      }
-      h1 {
-        font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
-        font-weight: 700;
-      }
-      h2 {
-        font-size: clamp(1.5rem, 2.5vw + 0.2rem, 2.25rem);
-        font-weight: 700;
-      }
-      h3 {
-        font-size: clamp(1.125rem, 1.2vw + 0.4rem, 1.5rem);
-        font-weight: 600;
-      }
-      p {
-        margin: 0.25rem 0 1rem;
-        color: var(--muted);
-        font-size: 1.05rem;
-      }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      .container {
-        max-width: var(--container);
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.9rem 1.25rem;
-        border-radius: 999px;
-        border: 0;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.15s ease, box-shadow 0.2s ease,
-          background 0.2s ease;
-        box-shadow: var(--shadow);
-        will-change: transform;
-      }
-      .btn.primary {
-        background: var(--primary);
-        color: white;
-      }
-      .btn.primary:hover {
-        background: var(--primary-600);
-        transform: translateY(-2px);
-      }
-      .btn.secondary {
-        background: #0f172a;
-        color: white;
-      }
-      .btn.link {
-        background: transparent;
-        box-shadow: none;
-        padding: 0.5rem 0;
-      }
-      .btn.link:hover {
-        opacity: 0.85;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        border-radius: 999px;
-        background: #e6fffa;
-        color: var(--primary);
-        font-weight: 600;
-      }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.4rem 0.7rem;
-        border-radius: 999px;
-        background: #f8fafc;
-        color: #334155;
-        font-size: 0.9rem;
-        border: 1px solid var(--line);
-      }
-      .section {
-        padding: clamp(48px, 6vw, 96px) 0;
-      }
-      .surface {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      /* Header */
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        backdrop-filter: saturate(180%) blur(10px);
-        background: linear-gradient(
-          to bottom,
-          rgba(245, 251, 250, 0.9),
-          rgba(245, 251, 250, 0.6)
-        );
-        border-bottom: 1px solid rgba(226, 232, 240, 0.7);
-      }
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        height: 72px;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-weight: 700;
-      }
-      .brand svg {
-        width: 40px;
-        height: 40px;
-      }
-      nav ul {
-        display: flex;
-        gap: 1.25rem;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      nav a {
-        color: #0f172a;
-        font-weight: 600;
-        opacity: 0.9;
-      }
-      nav a:hover,
-      nav a:focus {
-        opacity: 1;
-      }
-      .nav-cta {
-        display: flex;
-        gap: 0.75rem;
-        align-items: center;
-      }
-      .burger {
-        display: none;
-        background: none;
-        border: 0;
-        padding: 0.5rem;
-        border-radius: 10px;
-      }
-      .burger svg {
-        width: 28px;
-        height: 28px;
-      }
-      /* Mobile menu */
-      .mobile-menu {
-        display: none;
-      }
-      @media (max-width: 900px) {
-        nav {
-          display: none;
-        }
-        .burger {
-          display: inline-flex;
-        }
-        .mobile-menu {
-          display: block;
-          position: fixed;
-          inset: 72px 0 auto 0;
-          background: var(--surface);
-          border-top: 1px solid var(--line);
-          transform: translateY(-8px);
-          opacity: 0;
-          pointer-events: none;
-          transition: transform 0.2s ease, opacity 0.2s ease;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        }
-        .mobile-menu.open {
-          transform: translateY(0);
-          opacity: 1;
-          pointer-events: auto;
-        }
-        .mobile-menu ul {
-          list-style: none;
-          padding: 14px 20px 24px;
-          margin: 0;
-          display: grid;
-          gap: 0.25rem;
-        }
-        .mobile-menu a {
-          display: block;
-          padding: 12px 10px;
-          font-weight: 600;
-          color: #0f172a;
-          border-radius: 12px;
-        }
-        .mobile-menu a:hover {
-          background: #f1f5f9;
-        }
-      }
-      /* Hero */
-      .hero {
-        display: grid;
-        align-items: center;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: clamp(24px, 4vw, 56px);
-        padding: clamp(36px, 5vw, 72px) 0 0;
-      }
-      .hero .kicker {
-        margin-bottom: 0.5rem;
-      }
-      .hero p {
-        font-size: 1.1rem;
-        max-width: 55ch;
-      }
-      .cta-row {
-        display: flex;
-        justify-content: end;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1rem;
-      }
-      .trust {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem 1.25rem;
-        margin-top: 1.25rem;
-        align-items: center;
-      }
-      .trust small {
-        color: #475569;
-        font-weight: 600;
-      }
-      .device {
-        position: relative;
-        border-radius: 32px;
-        padding: 22px;
-        background: linear-gradient(160deg, #fff, #f8fffe);
-        border: 1px solid var(--line);
-        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
-        aspect-ratio: 9/18;
-        max-width: 380px;
-        margin-inline: auto;
-      }
-      .device::before,
-      .device::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(40px);
-        z-index: -1;
-        animation: floaty 8s ease-in-out infinite;
-      }
-      .device::before {
-        width: 240px;
-        height: 240px;
-        background: rgba(19, 163, 139, 0.15);
-        top: -40px;
-        right: -60px;
-      }
-      .device::after {
-        width: 200px;
-        height: 200px;
-        background: rgba(244, 193, 78, 0.18);
-        bottom: -40px;
-        left: -40px;
-        animation-delay: -2s;
-      }
-      .screen {
-        background: linear-gradient(180deg, #f9fefd, #ffffff);
-        border-radius: 22px;
-        height: 100%;
-        border: 1px solid #e7f3f1;
-        position: relative;
-        overflow: hidden;
-      }
-      .notch {
-        position: absolute;
-        inset: 0;
-        height: 26px;
-        width: 40%;
-        margin: 0 auto;
-        background: #0f172a10;
-        border-radius: 0 0 14px 14px;
-      }
-      .ui {
-        position: absolute;
-        inset: 26px 0 0 0;
-        padding: 16px 16px 0;
-        display: grid;
-        gap: 12px;
-        font-size: 0.95rem;
-      }
-      .ui .search {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        border: 1px solid #e2e8f0;
-        background: #fff;
-        padding: 0.15rem 0.75rem;
-        border-radius: 14px;
-        line-height: 0;
-      }
-      .ui .pill {
-        display: flex;
-        gap: 0.5rem;
-        overflow: hidden;
-        margin: 10 10px;
-      }
-      .ui .pill span {
-        display: flex;
-        align-items: center;
-        background: #f1f5f9;
-        color: #334155;
-        padding: 0.1rem 0.6rem;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        line-height: 0;
-        white-space: nowrap;
-      }
-      .card {
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        padding: 0.75rem;
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 0.75rem;
-        align-items: center;
-        box-shadow: 0 6px 16px rgba(2, 132, 199, 0.05);
-      }
-      .avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #13a38b22, #0ea5e922);
-        padding: 8px;
-      }
-      .stars {
-        color: #f59e0b;
-        font-size: 0.9rem;
-      }
-      .price {
-        font-weight: 700;
-      }
-      @keyframes floaty {
-        0% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-8px);
-        }
-        100% {
-          transform: translateY(0);
-        }
-      }
-      @media (max-width: 1024px) {
-        .hero {
-          grid-template-columns: 1fr;
-        }
-        .device {
-          max-width: 320px;
-        }
-      }
-      /* Section: animated timeline (replaces .steps/.step) */
-      .timeline {
-        position: relative;
-        padding-top: 12px;
-      }
-      .timeline .tl-wrap {
-        position: relative;
-      }
-
-      .timeline .tl-track,
-      .timeline .tl-progress {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 50;
-        height: 3px;
-        border-radius: 999px;
-      }
-      .timeline .tl-track {
-        background: var(--line);
-      }
-      .timeline .tl-progress {
-        background: linear-gradient(90deg, var(--primary), var(--primary-600));
-        width: 0%;
-      }
-
-      /* rail + cards */
-      .timeline-rail {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-      .tl-step {
-        position: relative;
-        text-align: center;
-      }
-      .tl-dot {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%) translateY(-45%);
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        background: #fff;
-        border: 3px solid var(--primary);
-        box-shadow: 0 6px 16px rgba(19, 163, 139, 0.2);
-      }
-      .tl-card {
-        margin-top: 40px;
-        padding: 18px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        background: linear-gradient(0deg, #fff, #fafefd);
-        box-shadow: var(--shadow);
-        display: grid;
-        gap: 0.35rem;
-      }
-      .tl-icon svg {
-        width: 28px;
-        height: 28px;
-        color: var(--primary);
-      }
-      .tl-card h3 {
-        margin: 0.1rem 0 0;
-      }
-      .tl-card p {
-        margin: 0.25rem 0 0;
-      }
-
-      /* animation on reveal */
-      .timeline.reveal.visible .tl-progress {
-        animation: tl-fill 1800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      }
-      @keyframes tl-fill {
-        0% {
-          width: 0%;
-        }
-        35% {
-          width: 33.333%;
-        }
-        70% {
-          width: 66.666%;
-        }
-        100% {
-          width: 100%;
-        }
-      }
-      .timeline.reveal.visible .tl-dot {
-        animation: tl-pulse 1800ms ease forwards;
-      }
-      @keyframes tl-pulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(19, 163, 139, 0);
-        }
-        50% {
-          box-shadow: 0 0 0 10px rgba(19, 163, 139, 0.08);
-        }
-      }
-
-      /* mobile: pionowa oś czasu */
-      @media (max-width: 900px) {
-        .timeline {
-          padding-left: 8px;
-        }
-        .timeline-rail {
-          grid-template-columns: 1fr;
-        }
-        .timeline .tl-track {
-          left: 22px;
-          right: auto;
-          top: auto;
-          bottom: 4px;
-          width: 3px;
-          height: calc(100% - 12px);
-        }
-        .timeline .tl-progress {
-          left: 0px;
-          right: auto;
-          top: auto;
-          bottom: 4px;
-          width: 3px;
-          height: 0%;
-        }
-        .tl-step {
-          text-align: left;
-          padding-left: 42px;
-        }
-        .tl-dot {
-          left: 14px;
-          top: 50%;
-          transform: none;
-        }
-        .tl-card {
-          margin-top: 0;
-        }
-        .timeline.reveal.visible .tl-progress {
-          animation: tl-growY 1800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        @keyframes tl-growY {
-          0% {
-            height: 0%;
-          }
-          35% {
-            height: 33.333%;
-          }
-          70% {
-            height: 66.666%;
-          }
-          100% {
+        html,
+        body {
             height: 100%;
-          }
         }
-      }
 
-      /* prefer-reduced-motion: bez animacji, pełny pasek postępu */
-      @media (prefers-reduced-motion: reduce) {
-        .timeline .tl-progress {
-          animation: none !important;
-          width: 100% !important;
-          height: 100%;
+        /* === Base utilities === */
+        .grid {
+            display: grid;
         }
-        .timeline .tl-dot {
-          animation: none !important;
+
+        /* ############################## */
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+            Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(
+                    1200px 800px at 10% -10%,
+                    rgba(19, 163, 139, 0.1),
+                    transparent 60%
+            ),
+            radial-gradient(
+                    900px 700px at 110% 10%,
+                    rgba(244, 193, 78, 0.12),
+                    transparent 60%
+            ),
+            var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
-      }
-      /* Cards / services */
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-      .card-service {
-        padding: 22px;
-        border-radius: var(--radius);
-        border: 1px solid var(--line);
-        background: linear-gradient(160deg, #fff, #f8fffe);
-        box-shadow: var(--shadow);
-        display: grid;
-        gap: 0.5rem;
-      }
-      .card-service .icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        display: grid;
-        place-items: center;
-        background: #e6fffa;
-        padding: 8px;
-      }
-      .card-service ul {
-        margin: 0.25rem 0 0;
-        padding-left: 1rem;
-        color: #475569;
-      }
-      .card-service .actions {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-top: 0.5rem;
-      }
-      @media (max-width: 1000px) {
-        .cards {
-          grid-template-columns: 1fr 1fr;
+
+        .text-neutral {
+            color: var(--color-neutral);
         }
-      }
-      @media (max-width: 640px) {
-        .cards {
-          grid-template-columns: 1fr;
+
+        .heading2B {
+            font-size: 24px;
+            font-weight: 500;
         }
-      }
-      /* 2x2 grid (USP) */
-      .grid-2x2 {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-      }
-      .usp {
-        padding: 22px;
-        border: 1px solid var(--line);
-        background: #fff;
-        border-radius: var(--radius-md);
-        box-shadow: var(--shadow);
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 14px;
-        align-items: flex-start;
-      }
-      .usp .icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        background: #f1f5f9;
-        display: grid;
-        place-items: center;
-      }
-      @media (max-width: 900px) {
-        .grid-2x2 {
-          grid-template-columns: 1fr;
+
+        h1,
+        h2,
+        h3 {
+            font-family: Fredoka, Inter, system-ui, -apple-system, Segoe UI, Roboto,
+            Helvetica, Arial, sans-serif;
+            line-height: 1.15;
+            margin: 0 0 0.5rem;
+            color: #0f172a;
         }
-      }
-      /* Why us section */
-      .why-us-layout {
-        display: flex;
-        flex-direction: column;
-        gap: clamp(2rem, 4vw, 3.5rem);
-        align-items: center;
-        justify-items: center;
-      }
-      @media (min-width: 1024px) {
-        .why-us-layout {
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+        h1 {
+            font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+            font-weight: 700;
         }
-      }
-      .why-us-illustration {
-        width: 100%;
-        max-width: clamp(260px, 45vw, 420px);
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
-      .why-us-grid {
-        width: 100%;
-        display: grid;
-        gap: clamp(1.5rem, 3vw, 2.5rem);
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        justify-items: center;
-      }
-      .why-us-card {
-        background: linear-gradient(160deg, #fff, #f8fffe);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 1.75rem 1.5rem;
-        width: 100%;
-        max-width: 320px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.25rem;
-        height: 100%;
-        transition: transform 0.18s ease, box-shadow 0.18s ease;
-      }
-      .why-us-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 40px rgba(19, 163, 139, 0.18);
-      }
-      .why-us-card img {
-        width: clamp(100px, 20vw, 140px);
-        height: auto;
-      }
-      /* Two columns "dla kogo" */
-      .split {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-      .panel {
-        padding: 24px;
-        border: 1px solid var(--line);
-        background: linear-gradient(180deg, #fff, #fafefd);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      .panel ul {
-        margin: 0;
-        padding-left: 1.1rem;
-      }
-      @media (max-width: 900px) {
-        .split {
-          grid-template-columns: 1fr;
+
+        h2 {
+            font-size: clamp(1.5rem, 2.5vw + 0.2rem, 2.25rem);
+            font-weight: 700;
         }
-      }
-      /* Testimonials slider */
-      .slider {
-        position: relative;
-      }
-      .slides {
-        display: flex;
-        gap: 18px;
-        overflow: hidden;
-        scroll-behavior: smooth;
-      }
-      .testimonial {
-        min-width: calc(33.333% - 12px);
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        padding: 18px;
-        box-shadow: var(--shadow);
-      }
-      .testimonial header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        border: 0;
-        background: none;
-        position: static;
-      }
-      .testimonial .ph {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #fde68a, #a7f3d0);
-      }
-      .slider-controls {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: flex-end;
-        margin-top: 0.75rem;
-      }
-      .slider button {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 0.55rem 0.7rem;
-        cursor: pointer;
-      }
-      @media (max-width: 1000px) {
-        .testimonial {
-          min-width: calc(50% - 9px);
+
+        h3 {
+            font-size: clamp(1.125rem, 1.2vw + 0.4rem, 1.5rem);
+            font-weight: 600;
         }
-      }
-      @media (max-width: 640px) {
-        .testimonial {
-          min-width: 100%;
+
+        p {
+            margin: 0.25rem 0 1rem;
+            color: var(--muted);
+            font-size: 1.05rem;
         }
-      }
-      /* FAQ */
-      .faq {
-        max-width: 900px;
-        margin: 0 auto;
-      }
-      details {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 1rem 1.1rem;
-        box-shadow: var(--shadow);
-      }
-      details + details {
-        margin-top: 0.75rem;
-      }
-      summary {
-        cursor: pointer;
-        font-weight: 700;
-        color: #0f172a;
-        list-style: none;
-      }
-      summary::-webkit-details-marker {
-        display: none;
-      }
-      /* CTA Final */
-      .cta-final {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(120deg, #13a38b, #0e7f6b);
-        color: white;
-        border-radius: var(--radius);
-        padding: clamp(28px, 4vw, 44px);
-      }
-      .cta-final::after {
-        content: "";
-        position: absolute;
-        width: 340px;
-        height: 340px;
-        border-radius: 50%;
-        right: -120px;
-        top: -120px;
-        background: radial-gradient(
-          circle at 30% 30%,
-          rgba(255, 255, 255, 0.35),
-          rgba(255, 255, 255, 0) 60%
-        );
-      }
-      /* Footer */
-      footer {
-        padding: 32px 0;
-        color: #475569;
-      }
-      footer .grid {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
-        gap: 18px;
-      }
-      footer a {
-        color: #334155;
-      }
-      footer a:hover {
-        text-decoration: underline;
-      }
-      @media (max-width: 900px) {
-        footer .grid {
-          grid-template-columns: 1fr 1fr;
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
-      }
-      @media (max-width: 560px) {
-        footer .grid {
-          grid-template-columns: 1fr;
+
+        img {
+            max-width: 100%;
+            display: block;
         }
-      }
-      /* Reveal on scroll */
-      .reveal {
-        opacity: 0;
-        transform: translateY(14px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: none;
-      }
-      /* Focus ring */
-      :focus-visible {
-        outline: 3px solid rgba(14, 127, 107, 0.5);
-        outline-offset: 2px;
-      }
-      /* Reduced motion */
-      @media (prefers-reduced-motion: reduce) {
-        .reveal {
-          opacity: 1;
-          transform: none;
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 20px;
         }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.25rem;
+            border-radius: 999px;
+            border: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease,
+            background 0.2s ease;
+            box-shadow: var(--shadow);
+            will-change: transform;
+        }
+
+        .btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: var(--primary-600);
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #0f172a;
+            color: white;
+        }
+
+        .btn.link {
+            background: transparent;
+            box-shadow: none;
+            padding: 0.5rem 0;
+        }
+
+        .btn.link:hover {
+            opacity: 0.85;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 999px;
+            background: #e6fffa;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.4rem 0.7rem;
+            border-radius: 999px;
+            background: #f8fafc;
+            color: #334155;
+            font-size: 0.9rem;
+            border: 1px solid var(--line);
+        }
+
+        .section {
+            padding: clamp(48px, 6vw, 96px) 0;
+        }
+
+        .surface {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: saturate(180%) blur(10px);
+            background: linear-gradient(
+                    to bottom,
+                    rgba(245, 251, 250, 0.9),
+                    rgba(245, 251, 250, 0.6)
+            );
+            border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            height: 72px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+        }
+
+        .brand svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.25rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            color: #0f172a;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            opacity: 1;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .burger {
+            display: none;
+            background: none;
+            border: 0;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .burger svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                display: none;
+            }
+
+            .burger {
+                display: inline-flex;
+            }
+
+            .mobile-menu {
+                display: block;
+                position: fixed;
+                inset: 72px 0 auto 0;
+                background: var(--surface);
+                border-top: 1px solid var(--line);
+                transform: translateY(-8px);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.2s ease, opacity 0.2s ease;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            }
+
+            .mobile-menu.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-menu ul {
+                list-style: none;
+                padding: 14px 20px 24px;
+                margin: 0;
+                display: grid;
+                gap: 0.25rem;
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 12px 10px;
+                font-weight: 600;
+                color: #0f172a;
+                border-radius: 12px;
+            }
+
+            .mobile-menu a:hover {
+                background: #f1f5f9;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: clamp(24px, 4vw, 56px);
+            padding: clamp(36px, 5vw, 72px) 0 0;
+        }
+
+        .hero .kicker {
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 55ch;
+        }
+
+        .cta-row {
+            display: flex;
+            justify-content: end;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+            margin-top: 1.25rem;
+            align-items: center;
+        }
+
+        .trust small {
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .device {
+            position: relative;
+            border-radius: 32px;
+            padding: 22px;
+            background: linear-gradient(160deg, #fff, #f8fffe);
+            border: 1px solid var(--line);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+            aspect-ratio: 9/18;
+            max-width: 380px;
+            margin-inline: auto;
+        }
+
         .device::before,
         .device::after {
-          animation: none;
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+            animation: floaty 8s ease-in-out infinite;
         }
+
+        .device::before {
+            width: 240px;
+            height: 240px;
+            background: rgba(19, 163, 139, 0.15);
+            top: -40px;
+            right: -60px;
+        }
+
+        .device::after {
+            width: 200px;
+            height: 200px;
+            background: rgba(244, 193, 78, 0.18);
+            bottom: -40px;
+            left: -40px;
+            animation-delay: -2s;
+        }
+
+        .screen {
+            background: linear-gradient(180deg, #f9fefd, #ffffff);
+            border-radius: 22px;
+            height: 100%;
+            border: 1px solid #e7f3f1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notch {
+            position: absolute;
+            inset: 0;
+            height: 26px;
+            width: 40%;
+            margin: 0 auto;
+            background: #0f172a10;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .ui {
+            position: absolute;
+            inset: 26px 0 0 0;
+            padding: 16px 16px 0;
+            display: grid;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .ui .search {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            padding: 0.15rem 0.75rem;
+            border-radius: 14px;
+            line-height: 0;
+        }
+
+        .ui .pill {
+            display: flex;
+            gap: 0.5rem;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .ui .pill span {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            color: #334155;
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 0;
+            white-space: nowrap;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 0.75rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 0.75rem;
+            align-items: center;
+            box-shadow: 0 6px 16px rgba(2, 132, 199, 0.05);
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #13a38b22, #0ea5e922);
+            padding: 8px;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            font-weight: 700;
+        }
+
+        @keyframes floaty {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .device {
+                max-width: 320px;
+            }
+        }
+
+        /* Section: animated timeline (replaces .steps/.step) */
+        .timeline {
+            position: relative;
+            padding-top: 12px;
+        }
+
+        .timeline .tl-wrap {
+            position: relative;
+        }
+
+        .timeline .tl-track,
+        .timeline .tl-progress {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 3px;
+            border-radius: 999px;
+        }
+
+        .timeline .tl-track {
+            background: var(--line);
+        }
+
+        .timeline .tl-progress {
+            background: linear-gradient(90deg, var(--primary), var(--primary-600));
+            width: 0;
+        }
+
+        /* rail + cards */
+        .timeline-rail {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .tl-step {
+            position: relative;
+            text-align: center;
+        }
+
+        .tl-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-45%);
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            background: #fff;
+            border: 3px solid var(--primary);
+            box-shadow: 0 6px 16px rgba(19, 163, 139, 0.2);
+        }
+
+        .tl-card {
+            margin-top: 40px;
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: linear-gradient(0deg, #fff, #fafefd);
+            box-shadow: var(--shadow);
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        .tl-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--primary);
+        }
+
+        .tl-card h3 {
+            margin: 0.1rem 0 0;
+        }
+
+        .tl-card p {
+            margin: 0.25rem 0 0;
+        }
+
+        /* animation on reveal */
+        .timeline.reveal.visible .tl-progress {
+            animation: tl-fill 1800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes tl-fill {
+            0% {
+                width: 0;
+            }
+            35% {
+                width: 33.333%;
+            }
+            70% {
+                width: 66.666%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        .timeline.reveal.visible .tl-dot {
+            animation: tl-pulse 1800ms ease forwards;
+        }
+
+        @keyframes tl-pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(19, 163, 139, 0);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(19, 163, 139, 0.08);
+            }
+        }
+
+        /* mobile: pionowa oś czasu */
+        @media (max-width: 900px) {
+            .timeline {
+                padding-left: 8px;
+            }
+
+            .timeline-rail {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline .tl-track {
+                left: 22px;
+                right: auto;
+                top: auto;
+                bottom: 4px;
+                width: 3px;
+                height: calc(100% - 12px);
+            }
+
+            .timeline .tl-progress {
+                left: 0;
+                right: auto;
+                top: auto;
+                bottom: 4px;
+                width: 3px;
+                height: 0;
+            }
+
+            .tl-step {
+                text-align: left;
+                padding-left: 42px;
+            }
+
+            .tl-dot {
+                left: 14px;
+                top: 50%;
+                transform: none;
+            }
+
+            .tl-card {
+                margin-top: 0;
+            }
+
+            .timeline.reveal.visible .tl-progress {
+                animation: tl-growY 1800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            }
+
+            @keyframes tl-growY {
+                0% {
+                    height: 0;
+                }
+                35% {
+                    height: 33.333%;
+                }
+                70% {
+                    height: 66.666%;
+                }
+                100% {
+                    height: 100%;
+                }
+            }
+        }
+
+        /* prefer-reduced-motion: bez animacji, pełny pasek postępu */
+        @media (prefers-reduced-motion: reduce) {
+            .timeline .tl-progress {
+                animation: none !important;
+                width: 100% !important;
+                height: 100%;
+            }
+
+            .timeline .tl-dot {
+                animation: none !important;
+            }
+        }
+
+        /* Cards / services */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card-service {
+            padding: 22px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: linear-gradient(160deg, #fff, #f8fffe);
+            box-shadow: var(--shadow);
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .card-service .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: #e6fffa;
+            padding: 8px;
+        }
+
+        .card-service ul {
+            margin: 0.25rem 0 0;
+            padding-left: 1rem;
+            color: #475569;
+        }
+
+        .card-service .actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 1000px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        .usp .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #f1f5f9;
+            display: grid;
+            place-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2x2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Why us section */
+        .why-us-layout {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(2rem, 4vw, 3.5rem);
+            align-items: center;
+            justify-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .why-us-layout {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            }
+        }
+
+        .why-us-illustration {
+            width: 100%;
+            max-width: clamp(260px, 45vw, 420px);
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .why-us-grid {
+            width: 100%;
+            display: grid;
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            justify-items: center;
+        }
+
+        .why-us-card {
+            background: linear-gradient(160deg, #fff, #f8fffe);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.75rem 1.5rem;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            height: 100%;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .why-us-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(19, 163, 139, 0.18);
+        }
+
+        .why-us-card img {
+            width: clamp(100px, 20vw, 140px);
+            height: auto;
+        }
+
+        /* Two columns "dla kogo" */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .panel {
+            padding: 24px;
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, #fff, #fafefd);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .panel ul {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        @media (max-width: 900px) {
+            .split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Testimonials slider */
+        .slider {
+            position: relative;
+        }
+
         .slides {
-          scroll-behavior: auto;
+            display: flex;
+            gap: 18px;
+            overflow: hidden;
+            scroll-behavior: smooth;
         }
-        .btn {
-          transition: none;
+
+        .testimonial {
+            min-width: calc(33.333% - 12px);
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            box-shadow: var(--shadow);
         }
-      }
+
+        .testimonial header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border: 0;
+            background: none;
+            position: static;
+        }
+
+        .testimonial .ph {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fde68a, #a7f3d0);
+        }
+
+        .slider-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            margin-top: 0.75rem;
+        }
+
+        .slider button {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.55rem 0.7rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1000px) {
+            .testimonial {
+                min-width: calc(50% - 9px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .testimonial {
+                min-width: 100%;
+            }
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        details {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            box-shadow: var(--shadow);
+        }
+
+        details + details {
+            margin-top: 0.75rem;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: #0f172a;
+            list-style: none;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(120deg, #13a38b, #0e7f6b);
+            color: white;
+            border-radius: var(--radius);
+            padding: clamp(28px, 4vw, 44px);
+        }
+
+        .cta-final::after {
+            content: "";
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            right: -120px;
+            top: -120px;
+            background: radial-gradient(
+                    circle at 30% 30%,
+                    rgba(255, 255, 255, 0.35),
+                    rgba(255, 255, 255, 0) 60%
+            );
+        }
+
+        /* Footer */
+        footer {
+            padding: 32px 0;
+            color: #475569;
+        }
+
+        footer .grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+            gap: 18px;
+        }
+
+        footer a {
+            color: #334155;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            footer .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            footer .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Reveal on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Focus ring */
+        :focus-visible {
+            outline: 3px solid rgba(14, 127, 107, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .device::before,
+            .device::after {
+                animation: none;
+            }
+
+            .slides {
+                scroll-behavior: auto;
+            }
+
+            .btn {
+                transition: none;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <a href="#main" class="chip" style="position: absolute; left: -9999px"
-      >Przejdź do treści</a
-    >
-    <header>
-      <div class="container nav" role="navigation" aria-label="Główne">
+</head>
+<body>
+<a href="#main" class="chip" style="position: absolute; left: -9999px"
+>Przejdź do treści</a
+>
+<header>
+    <div class="container nav" role="navigation" aria-label="Główne">
         <div class="brand">
-          <!-- Simple inline logo (dog+cat + paw) -->
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#13A38B" />
-                <stop offset="1" stop-color="#0E7F6B" />
-              </linearGradient>
-            </defs>
-            <circle cx="32" cy="32" r="30" fill="url(#g1)" opacity=".25" />
-            <path
-              d="M40.5 37c5 0 9-4.5 9-10s-3-9-7.5-9c-2.8 0-4 .8-6.5 3.3-2.7-2.5-3.7-3.3-6.5-3.3C24 18 21 21.5 21 27s4 10 9 10"
-              fill="none"
-              stroke="#13A38B"
-              stroke-width="2.8"
-              stroke-linecap="round"
-            />
-            <circle cx="39.5" cy="33" r="3" fill="#F4C14E" />
-            <path
-              d="M30 41c-2 3-5 5-9 6"
-              stroke="#0E7F6B"
-              stroke-width="2.4"
-              fill="none"
-              stroke-linecap="round"
-            />
-          </svg>
-          <span>Zoovi</span>
+            <!-- Simple inline logo (dog+cat + paw) -->
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs>
+                    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0" stop-color="#13A38B"/>
+                        <stop offset="1" stop-color="#0E7F6B"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="32" cy="32" r="30" fill="url(#g1)" opacity=".25"/>
+                <path
+                        d="M40.5 37c5 0 9-4.5 9-10s-3-9-7.5-9c-2.8 0-4 .8-6.5 3.3-2.7-2.5-3.7-3.3-6.5-3.3C24 18 21 21.5 21 27s4 10 9 10"
+                        fill="none"
+                        stroke="#13A38B"
+                        stroke-width="2.8"
+                        stroke-linecap="round"
+                />
+                <circle cx="39.5" cy="33" r="3" fill="#F4C14E"/>
+                <path
+                        d="M30 41c-2 3-5 5-9 6"
+                        stroke="#0E7F6B"
+                        stroke-width="2.4"
+                        fill="none"
+                        stroke-linecap="round"
+                />
+            </svg>
+            <span>Zoovi</span>
         </div>
 
         <nav aria-label="Menu">
-          <ul>
+            <ul>
+                <li><a href="#jak">Jak działa</a></li>
+                <li><a href="#uslugi">Usługi</a></li>
+                <li><a href="#dlakogo">Dla kogo</a></li>
+                <li><a href="#opinie">Opinie</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-cta">
+            <a class="btn link" href="#specjalisci">Dla specjalistów</a>
+            <a
+                    class="btn primary"
+                    href="#pobierz"
+                    aria-label="Pobierz aplikację Zoovi"
+            >
+                <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                >
+                    <path
+                            d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                    />
+                </svg>
+                Pobierz aplikację</a
+            >
+            <button
+                    class="burger"
+                    aria-expanded="false"
+                    aria-controls="mobileMenu"
+                    aria-label="Otwórz menu"
+            >
+                <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                >
+                    <path d="M3 6h18M3 12h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div
+            id="mobileMenu"
+            class="mobile-menu"
+            role="dialog"
+            aria-label="Menu mobilne"
+    >
+        <ul class="container">
             <li><a href="#jak">Jak działa</a></li>
             <li><a href="#uslugi">Usługi</a></li>
             <li><a href="#dlakogo">Dla kogo</a></li>
             <li><a href="#opinie">Opinie</a></li>
             <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </nav>
-
-        <div class="nav-cta">
-          <a class="btn link" href="#specjalisci">Dla specjalistów</a>
-          <a
-            class="btn primary"
-            href="#pobierz"
-            aria-label="Pobierz aplikację Zoovi"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
-              />
-            </svg>
-            Pobierz aplikację</a
-          >
-          <button
-            class="burger"
-            aria-expanded="false"
-            aria-controls="mobileMenu"
-            aria-label="Otwórz menu"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M3 6h18M3 12h18M3 18h18" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div
-        id="mobileMenu"
-        class="mobile-menu"
-        role="dialog"
-        aria-label="Menu mobilne"
-      >
-        <ul class="container">
-          <li><a href="#jak">Jak działa</a></li>
-          <li><a href="#uslugi">Usługi</a></li>
-          <li><a href="#dlakogo">Dla kogo</a></li>
-          <li><a href="#opinie">Opinie</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#pobierz">Pobierz aplikację</a></li>
-          <li><a href="#specjalisci">Dla specjalistów</a></li>
+            <li><a href="#pobierz">Pobierz aplikację</a></li>
+            <li><a href="#specjalisci">Dla specjalistów</a></li>
         </ul>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <main id="main">
-      <!-- HERO -->
-      <section class="container hero section" id="start">
+<main id="main">
+    <!-- HERO -->
+    <section class="container hero section" id="start">
         <div class="reveal">
-          <span class="badge kicker">Cześć! Jesteśmy Zoovi</span>
-          <h1>Wszystkie usługi dla Twojego pupila — w jednym miejscu.</h1>
-          <p>
-            Rezerwuj weterynarza, groomera i opiekuna w kilkadziesiąt sekund.
-            Intuicyjna aplikacja zaprojektowana dla wygody właścicieli i
-            komfortu zwierzaków.
-          </p>
-          <div class="cta-row">
-            <a class="btn primary" href="#pobierz">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"
-                />
-              </svg>
-              Pobierz aplikację
-            </a>
-            <a class="btn secondary" href="#jak">
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M12 6l-8 4 8 4 8-4-8-4zm0 8v4m0-4l-8-4v4l8 4 8-4v-4l-8 4z"
-                />
-              </svg>
-              Zobacz jak to działa
-            </a>
-          </div>
-        </div>
-
-        <div class="reveal">
-          <!-- Phone mockup -->
-          <div class="device" aria-hidden="true">
-            <div class="screen">
-              <div class="notch"></div>
-              <div class="ui">
-                <div class="search">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#64748B"
-                    stroke-width="2"
-                  >
-                    <circle cx="11" cy="11" r="7" />
-                    <path d="M21 21l-4.3-4.3" />
-                  </svg>
-                  Szukaj usługi lub specjalisty...
-                </div>
-                <div class="pill">
-                  <span>Weterynarz</span><span>Groomer</span><span>Opieka</span
-                  ><span>...</span>
-                </div>
-                <div class="card">
-                  <div class="avatar">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                      <g fill="#13A38B">
-                        <path
-                          fill-rule="evenodd"
-                          d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
-                          clip-rule="evenodd"
-                        />
-                        <path
-                          d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
-                        />
-                        <path
-                          d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
-                        />
-                      </g>
-                    </svg>
-                  </div>
-                  <div>
-                    <strong>dr Anna K.</strong>
-                    <div class="stars">★★★★★</div>
-                    <small style="color: #64748b"
-                      >Szczepienia • Badania • Konsultacje</small
-                    >
-                  </div>
-                  <div class="price">120 zł</div>
-                </div>
-                <div class="card">
-                  <div class="avatar">
+            <span class="badge kicker">Cześć! Jesteśmy Zoovi</span>
+            <h1>Wszystkie usługi dla Twojego pupila — w jednym miejscu.</h1>
+            <p>
+                Rezerwuj weterynarza, groomera i opiekuna w kilkadziesiąt sekund.
+                Intuicyjna aplikacja zaprojektowana dla wygody właścicieli i
+                komfortu zwierzaków.
+            </p>
+            <div class="cta-row">
+                <a class="btn primary" href="#pobierz">
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      transform="rotate(-45)"
-                      viewBox="0 0 512 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
                     >
-                      <path
-                        fill="#13A38B"
-                        d="M103.48 224a71.64 71.64 0 0 0 44.76-15.66l41.5 16.89l6.82-12.63a39 39 0 0 1 4.32-6.37l14.22-14.42l-41.17-24.94A72 72 0 1 0 103.48 224m0-112a40 40 0 1 1-40 40a40 40 0 0 1 40-40"
-                      />
-                      <path
-                        fill="#13A38B"
-                        d="m480 169l-5.52-12.58c-4.48-10.42-14.74-16-32.78-17.85c-10.12-1-26.95-1.24-49.69 3.81c-20 4.45-122.14 28.2-164.95 58.62c-20.25 14.39-24.06 33.67-27.06 49.16c-2.78 14.14-5 25.31-18 35c-15 11.14-27.27 16.38-33.58 18.6a71.74 71.74 0 1 0 24.79 38Zm-224.52 87a16 16 0 1 1 16-16a16 16 0 0 1-16 16m-152 144a40 40 0 1 1 40-40a40 40 0 0 1-40 40"
-                      />
-                      <path
-                        fill="#13A38B"
-                        d="m343.79 259.87l-83.74 48.18l27.63 13.08l3.62 1.74C310 331.92 359.74 356 410.53 359c3.89.23 7.47.34 10.78.34C442 359.31 453 354 459.75 350L480 336Z"
-                      />
+                        <path
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5l5-5m-5-7v12"
+                        />
                     </svg>
-                  </div>
-                  <div>
-                    <strong>Groom Room</strong>
-                    <div class="stars">★★★★☆</div>
-                    <small style="color: #64748b"
-                      >Strzyżenie • Kąpiel • Pazurki</small
+                    Pobierz aplikację
+                </a>
+                <a class="btn secondary" href="#jak">
+                    <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
                     >
-                  </div>
-                  <div class="price">90 zł</div>
-                </div>
-                <div class="card">
-                  <div class="avatar">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                      <path
-                        fill="#13A38B"
-                        d="M38.707 8.293a1 1 0 0 1 0 1.414L28.414 20h-2.828l-3.5 3.5h-9.264a18.3 18.3 0 0 1-.71-3.553q-.497.025-1.112.025c-1.164 0-2.96-.078-3.5-.472c-1-1.325-1.5-3.972-1.5-3.972s2.787-.951 4-1.381c0-3.224 4.168-5.064 6.286-2.347c.526-.003 1.126.166 1.688.511c1.016.624 1.4 3.436 1.18 4.709c1.605 1.89 3.658 2.666 6.346 2.952l.103.011l11.69-11.69a1 1 0 0 1 1.414 0m-10.41 11.825L23.5 24.914v6.715c2.732-.365 5.067-.932 8-2.629c2.138 3.919 3.929 5.045 4.848 5.624c.37.233.6.377.652.579c.12.46.246.797.344 1.06c.124.329.204.543.174.737H37a1 1 0 1 0 0 2h2a1 1 0 0 0 1-1v-4.523c0-1.977-3-7.249-3-7.249L41.5 32c.405.253.952-.233.5-1c-.189-.504-.395-1.164-.629-1.912c-1.114-3.567-2.847-9.116-6.252-9.116c-.493 0-1.202.026-2.036.055c-1.387.05-3.121.112-4.786.09M21.43 31.871l.07-.007V25.5h-7.914c.807 1.753 1.773 3.022 2.522 4.006q.209.273.392.52c.479.646 1.875 4.805-.205 6.974H16a1 1 0 1 0 0 2h3a1 1 0 0 0 .965-.737h.002q.008 0 .014-.003c.042-.022.039-.136.03-.392a17 17 0 0 1-.011-.594v-5.249l.933-.1l.007-.001z"
-                      />
+                        <path
+                                d="M12 6l-8 4 8 4 8-4-8-4zm0 8v4m0-4l-8-4v4l8 4 8-4v-4l-8 4z"
+                        />
                     </svg>
-                  </div>
-                  <div>
-                    <strong>Dogwalker 24</strong>
-                    <div class="stars">★★★★★</div>
-                    <small style="color: #64748b"
-                      >Spacery • Opieka • Hotel</small
-                    >
-                  </div>
-                  <div class="price">od 35 zł</div>
+                    Zobacz jak to działa
+                </a>
+            </div>
+        </div>
+
+        <div class="reveal">
+            <!-- Phone mockup -->
+            <div class="device" aria-hidden="true">
+                <div class="screen">
+                    <div class="notch"></div>
+                    <div class="ui">
+                        <div class="search">
+                            <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#64748B"
+                                    stroke-width="2"
+                            >
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="M21 21l-4.3-4.3"/>
+                            </svg>
+                            Szukaj usługi lub specjalisty...
+                        </div>
+                        <div class="pill">
+                            <span>Weterynarz</span><span>Groomer</span><span>Opieka</span
+                        ><span>...</span>
+                        </div>
+                        <div class="card">
+                            <div class="avatar">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                    <g fill="#13A38B">
+                                        <path
+                                                fill-rule="evenodd"
+                                                d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
+                                                clip-rule="evenodd"
+                                        />
+                                        <path
+                                                d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
+                                        />
+                                        <path
+                                                d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
+                                        />
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>dr Anna K.</strong>
+                                <div class="stars">★★★★★</div>
+                                <small style="color: #64748b"
+                                >Szczepienia • Badania • Konsultacje</small
+                                >
+                            </div>
+                            <div class="price">120 zł</div>
+                        </div>
+                        <div class="card">
+                            <div class="avatar">
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        transform="rotate(-45)"
+                                        viewBox="0 0 512 512"
+                                >
+                                    <path
+                                            fill="#13A38B"
+                                            d="M103.48 224a71.64 71.64 0 0 0 44.76-15.66l41.5 16.89l6.82-12.63a39 39 0 0 1 4.32-6.37l14.22-14.42l-41.17-24.94A72 72 0 1 0 103.48 224m0-112a40 40 0 1 1-40 40a40 40 0 0 1 40-40"
+                                    />
+                                    <path
+                                            fill="#13A38B"
+                                            d="m480 169l-5.52-12.58c-4.48-10.42-14.74-16-32.78-17.85c-10.12-1-26.95-1.24-49.69 3.81c-20 4.45-122.14 28.2-164.95 58.62c-20.25 14.39-24.06 33.67-27.06 49.16c-2.78 14.14-5 25.31-18 35c-15 11.14-27.27 16.38-33.58 18.6a71.74 71.74 0 1 0 24.79 38Zm-224.52 87a16 16 0 1 1 16-16a16 16 0 0 1-16 16m-152 144a40 40 0 1 1 40-40a40 40 0 0 1-40 40"
+                                    />
+                                    <path
+                                            fill="#13A38B"
+                                            d="m343.79 259.87l-83.74 48.18l27.63 13.08l3.62 1.74C310 331.92 359.74 356 410.53 359c3.89.23 7.47.34 10.78.34C442 359.31 453 354 459.75 350L480 336Z"
+                                    />
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Groom Room</strong>
+                                <div class="stars">★★★★☆</div>
+                                <small style="color: #64748b"
+                                >Strzyżenie • Kąpiel • Pazurki</small
+                                >
+                            </div>
+                            <div class="price">90 zł</div>
+                        </div>
+                        <div class="card">
+                            <div class="avatar">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                    <path
+                                            fill="#13A38B"
+                                            d="M38.707 8.293a1 1 0 0 1 0 1.414L28.414 20h-2.828l-3.5 3.5h-9.264a18.3 18.3 0 0 1-.71-3.553q-.497.025-1.112.025c-1.164 0-2.96-.078-3.5-.472c-1-1.325-1.5-3.972-1.5-3.972s2.787-.951 4-1.381c0-3.224 4.168-5.064 6.286-2.347c.526-.003 1.126.166 1.688.511c1.016.624 1.4 3.436 1.18 4.709c1.605 1.89 3.658 2.666 6.346 2.952l.103.011l11.69-11.69a1 1 0 0 1 1.414 0m-10.41 11.825L23.5 24.914v6.715c2.732-.365 5.067-.932 8-2.629c2.138 3.919 3.929 5.045 4.848 5.624c.37.233.6.377.652.579c.12.46.246.797.344 1.06c.124.329.204.543.174.737H37a1 1 0 1 0 0 2h2a1 1 0 0 0 1-1v-4.523c0-1.977-3-7.249-3-7.249L41.5 32c.405.253.952-.233.5-1c-.189-.504-.395-1.164-.629-1.912c-1.114-3.567-2.847-9.116-6.252-9.116c-.493 0-1.202.026-2.036.055c-1.387.05-3.121.112-4.786.09M21.43 31.871l.07-.007V25.5h-7.914c.807 1.753 1.773 3.022 2.522 4.006q.209.273.392.52c.479.646 1.875 4.805-.205 6.974H16a1 1 0 1 0 0 2h3a1 1 0 0 0 .965-.737h.002q.008 0 .014-.003c.042-.022.039-.136.03-.392a17 17 0 0 1-.011-.594v-5.249l.933-.1l.007-.001z"
+                                    />
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Dogwalker 24</strong>
+                                <div class="stars">★★★★★</div>
+                                <small style="color: #64748b"
+                                >Spacery • Opieka • Hotel</small
+                                >
+                            </div>
+                            <div class="price">od 35 zł</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- JAK TO DZIAŁA -->
-      <section class="section" id="jak">
+    <!-- JAK TO DZIAŁA -->
+    <section class="section" id="jak">
         <div class="container">
-          <div class="reveal" style="text-align: center; margin-bottom: 24px">
-            <h2>Jak to działa</h2>
-            <p>Trzy proste kroki od wyszukania do potwierdzenia wizyty.</p>
-          </div>
-
-          <!-- Animated timeline -->
-          <div
-            class="timeline reveal"
-            aria-label="Trzy kroki procesu rezerwacji"
-          >
-            <div class="tl-wrap">
-              <div class="tl-track" aria-hidden="true">
-                <div class="tl-progress" aria-hidden="true"></div>
-              </div>
-
-              <ol class="timeline-rail">
-                <li class="tl-step">
-                  <span class="tl-dot" aria-hidden="true"></span>
-                  <div class="tl-card">
-                    <div class="tl-icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <circle cx="11" cy="11" r="7" />
-                        <path d="M21 21l-4.3-4.3" />
-                      </svg>
-                    </div>
-                    <h3>1. Znajdź usługę</h3>
-                    <p>
-                      Wpisz czego potrzebuje Twój pupil i wybierz lokalizację.
-                    </p>
-                  </div>
-                </li>
-
-                <li class="tl-step">
-                  <span class="tl-dot" aria-hidden="true"></span>
-                  <div class="tl-card">
-                    <div class="tl-icon" aria-hidden="true">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                      >
-                        <g fill="currentColor">
-                          <path
-                            d="M16 2a1 1 0 0 1 .993.883L17 3v1h1a3 3 0 0 1 2.995 2.824L21 7v12a3 3 0 0 1-2.824 2.995L18 22H6a3 3 0 0 1-2.995-2.824L3 19V7a3 3 0 0 1 2.824-2.995L6 4h1V3a1 1 0 0 1 1.993-.117L9 3v1h6V3a1 1 0 0 1 1-1m3 7H5v9.625c0 .705.386 1.286.883 1.366L6 20h12c.513 0 .936-.53.993-1.215l.007-.16z"
-                          />
-                          <path
-                            d="M12 12a1 1 0 0 1 .993.883L13 13v3a1 1 0 0 1-1.993.117L11 16v-2a1 1 0 0 1-.117-1.993L11 12z"
-                          />
-                        </g>
-                      </svg>
-                    </div>
-                    <h3>2. Wybierz termin i cenę</h3>
-                    <p>
-                      Porównaj specjalistów, opinie, dostępne godziny i ceny.
-                    </p>
-                  </div>
-                </li>
-
-                <li class="tl-step">
-                  <span class="tl-dot" aria-hidden="true"></span>
-                  <div class="tl-card">
-                    <div class="tl-icon" aria-hidden="true">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                      >
-                        <g
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                        >
-                          <path
-                            stroke-dasharray="64"
-                            stroke-dashoffset="64"
-                            d="M3 12c0 -4.97 4.03 -9 9 -9c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9c-4.97 0 -9 -4.03 -9 -9Z"
-                          >
-                            <animate
-                              fill="freeze"
-                              attributeName="stroke-dashoffset"
-                              dur="0.6s"
-                              values="64;0"
-                            />
-                          </path>
-                          <path
-                            stroke-dasharray="14"
-                            stroke-dashoffset="14"
-                            d="M8 12l3 3l5 -5"
-                          >
-                            <animate
-                              fill="freeze"
-                              attributeName="stroke-dashoffset"
-                              begin="0.6s"
-                              dur="0.2s"
-                              values="14;0"
-                            />
-                          </path>
-                        </g>
-                      </svg>
-                    </div>
-                    <h3>3. Rezerwuj i gotowe</h3>
-                    <p>Otrzymasz potwierdzenie i przypomnienia przed wizytą.</p>
-                  </div>
-                </li>
-              </ol>
+            <div class="reveal" style="text-align: center; margin-bottom: 24px">
+                <h2>Jak to działa</h2>
+                <p>Trzy proste kroki od wyszukania do potwierdzenia wizyty.</p>
             </div>
-          </div>
-          <!-- /Animated timeline -->
-        </div>
-      </section>
 
-      <!-- USŁUGI -->
-      <section class="section" id="uslugi">
-        <div class="container">
-          <div class="reveal" style="text-align: center; margin-bottom: 24px">
-            <h2>Najważniejsze kategorie usług</h2>
-            <p>Sprawdź, co możesz wygodnie zarezerwować przez Zoovi.</p>
-          </div>
-          <div class="cards">
-            <article class="card-service reveal" aria-labelledby="vet">
-              <div class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                  <g fill="#13A38B">
-                    <path
-                      fill-rule="evenodd"
-                      d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
-                      clip-rule="evenodd"
-                    />
-                    <path
-                      d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
-                    />
-                    <path
-                      d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
-                    />
-                  </g>
-                </svg>
-              </div>
-              <h3 id="vet">Weterynaria</h3>
-              <p>Konsultacje, szczepienia, badania i pilne wizyty.</p>
-              <ul>
-                <li>Zweryfikowane gabinety</li>
-                <li>Oceny i opinie właścicieli</li>
-                <li>Przejrzyste ceny i dostępność</li>
-              </ul>
-              <div class="actions">
-                <a class="btn primary" href="#pobierz">Zarezerwuj</a>
-                <a class="btn link" href="#faq">Dowiedz się więcej</a>
-              </div>
-            </article>
-            <article class="card-service reveal" aria-labelledby="groom">
-              <div class="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#13A38B"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M16 23q-.425 0-.712-.288T15 22t.288-.712T16 21h3v-1h-3q-.425 0-.712-.288T15 19t.288-.712T16 18h3v-1h-3q-.425 0-.712-.288T15 16t.288-.712T16 15h3v-1h-3q-.425 0-.712-.288T15 13t.288-.712T16 12h3v-1h-3q-.425 0-.712-.288T15 10t.288-.712T16 9h3V8h-3q-.425 0-.712-.288T15 7t.288-.712T16 6h4q.825 0 1.413.588T22 8v13q0 .825-.587 1.413T20 23zm-8-8q1.65 0 2.825-1.625T12 9.5t-1.175-3.875T8 4T5.175 5.625T4 9.5t1.175 3.875T8 15m0 8q-1.2 0-1.975-.888t-.6-2.087l.4-3.525q-1.7-.825-2.762-2.713T2 9.5q0-3.125 1.75-5.312T8 2t4.25 2.188T14 9.5q0 2.4-1.062 4.288T10.175 16.5l.4 3.525q.175 1.2-.6 2.088T8 23"
-                  />
-                </svg>
-              </div>
-              <h3 id="groom">Pielęgnacja</h3>
-              <p>Strzyżenie, kąpiel, trymowanie i pielęgnacja pazurów.</p>
-              <ul>
-                <li>Portfolio i galeria efektów</li>
-                <li>Różne pakiety usług</li>
-                <li>Szybka zmiana terminu</li>
-              </ul>
-              <div class="actions">
-                <a class="btn primary" href="#pobierz">Zarezerwuj</a>
-                <a class="btn link" href="#faq">Dowiedz się więcej</a>
-              </div>
-            </article>
-            <article class="card-service reveal" aria-labelledby="care">
-              <div class="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="#13A38B"
-                >
-                  <path
-                    d="M14 20.408c-.492.308-.903.546-1.192.709q-.23.129-.463.252h-.002a.75.75 0 0 1-.686 0a17 17 0 0 1-.465-.252a31 31 0 0 1-4.803-3.34C3.8 15.572 1 12.331 1 8.513C1 5.052 3.829 2.5 6.736 2.5C9.03 2.5 10.881 3.726 12 5.605C13.12 3.726 14.97 2.5 17.264 2.5C20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262A31 31 0 0 1 14 20.408"
-                  />
-                </svg>
-              </div>
-              <h3 id="care">Opieka</h3>
-              <p>Petsitting, spacery i hotele dla zwierząt.</p>
-              <ul>
-                <li>Sprawdzeni opiekunowie</li>
-                <li>Ubezpieczenie i wsparcie</li>
-                <li>Godziny dopasowane do Ciebie</li>
-              </ul>
-              <div class="actions">
-                <a class="btn primary" href="#pobierz">Zarezerwuj</a>
-                <a class="btn link" href="#faq">Dowiedz się więcej</a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- DLACZEGO ZOOVI -->
-      <section class="section">
-        <div class="container">
-          <div class="reveal" style="text-align: center; margin-bottom: 24px">
-            <h2>Dlaczego Zoovi</h2>
-            <p>Korzyści, które docenisz od pierwszej rezerwacji.</p>
-          </div>
-          <div class="why-us-layout">
-            <svg
-              class="why-us-illustration"
-              version="1.1"
-              id="svg1"
-              width="670"
-              height="585"
-              viewBox="0 0 670 585"
-              xmlns="http://www.w3.org/2000/svg"
+            <!-- Animated timeline -->
+            <div
+                    class="timeline reveal"
+                    aria-label="Trzy kroki procesu rezerwacji"
             >
-              <path
-                id="path1"
-                style="
-                  display: inline;
-                  fill: #552200;
-                  stroke: none;
-                  stroke-width: 1.00157;
-                  stroke-dasharray: none;
-                "
-                d="m 598.17518,14.668498 c -12.93373,0.400623 -25.58661,6.059433 -37.00781,11.86914 -36.57526,18.604981 -69.00763,51.741641 -95.71484,82.244142 -7.96759,9.09979 -15.59283,18.49811 -23.07422,28 -2.67682,3.39978 -6.07355,10.15198 -10.38086,11.59375 -3.80969,1.27521 -10.112,-2.42341 -13.83008,-3.44141 -11.82092,-3.23657 -23.91296,-6.03521 -36,-8.07226 -33.57159,-5.65795 -67.47122,-5.11908 -101,0.50586 -11.48688,1.92712 -22.80298,4.34424 -34,7.55468 -3.90091,1.11846 -9.95161,4.58014 -13.81641,2.16211 C 222.96723,140.58793 213.87718,121.55357 206.2826,111.78178 181.8281,80.316749 150.16984,44.848909 114.16737,26.537638 99.203589,18.92692 80.873759,11.884868 64.167369,18.248576 c -30.07431,11.45575 -38.13511,52.222903 -41.16602,80.533203 -6.44005,60.153261 6.69487,120.643251 39.21875,172.000001 9.85353,15.5592 24.84967,39.02667 41.947271,47 -3.71115,13.17511 -6.565371,26.45929 -14.359381,38 -6.79824,10.06628 -19.58506,14.89142 -25.63085,25 -8.55961,14.31171 10.80377,35.84021 22.99023,41 -7.76263,13.65619 -2.66748,28.06934 6,40 -16.75201,4.75574 -32.00391,13.20911 -41.91016,28 -4.04439,6.03857 -10.08984,35.00003 -10.08984,35.00003 0.73996,17.18933 11.19315,31.43774 28,35.84375 5.58545,1.46423 11.59384,-0.034 17,1.51563 7.46317,2.13935 12.82004,7.58788 21.000001,8.46679 14.61435,1.57019 22.15723,-4.27673 35,-8.55273 5.18045,-1.72479 11.50067,-0.47602 17,-2.01953 16.11584,-4.52326 27.63513,-18.54358 29,-35.25391 h 189 62 c 9.63586,0 20.47174,-1.3974 29.98047,0.14844 5.76593,0.93732 5.29882,7.36761 6.76953,11.85156 2.12524,6.47961 6.01532,12.29822 11.25391,16.67188 10.24365,8.55249 19.32592,5.91601 30.99609,8.33984 11.38977,2.3656 18.29456,9.0495 31,8.98828 10.74072,-0.0518 16.58167,-5.38562 26,-8.70312 12.18762,-4.29297 23.00037,-0.55958 33.91016,-10.59766 4.86639,-4.4776 9.75097,-10.17407 10.39062,-16.69922 1.10258,-11.24762 2.44976,-8.28864 2.69922,-17 -2.20941,-27.75989 -24.41821,-49.84741 -51,-56 7.53101,-12.76996 13.98822,-25.80933 6,-40 5.39758,-2.40576 9.89489,-6.6167 13.82617,-11 6.91546,-7.71064 15.09205,-20.30194 9.7168,-31 -3.70251,-7.36883 -12.63825,-10.84333 -18.53906,-16.17383 -7.68042,-6.93811 -12.67999,-16.11719 -16,-25.82617 -1.61389,-4.71967 -5.77454,-13.03681 -3.80274,-17.99609 2.72962,-6.86524 12.64167,-11.77252 17.62891,-17.04297 11.06793,-11.69644 20.82727,-24.37955 29.47461,-37.96097 32.26672,-50.67773 46.81506,-121.49634 40.86523,-181.000001 -2.57141,-25.71619 -10.67242,-59.531556 -39.16992,-67.572266 -4.33841,-1.224106 -8.68094,-1.674556 -12.99219,-1.541015 z"
-                sodipodi:nodetypes="ssssssssssssssscssccscsssssccssssssssscccssssssssss"
-                inkscape:label="path1"
-              />
-              <path
-                style="
-                  display: inline;
-                  opacity: 1;
-                  fill: #ffe6d6;
-                  fill-opacity: 1;
-                  stroke: none;
-                "
-                d="m 579.16737,554.78178 c 2.46967,-9.23853 4.44415,-18.41895 2.10028,-28 -0.50439,-2.06171 -2.87414,-10.35126 -6.47217,-7.24847 -2.97961,2.56951 1.51282,16.1314 1.33252,20.24847 -0.83398,19.04663 -18.41211,28.2262 -35.96063,24.48224 -19.20605,-4.0976 -22.79352,-23.04218 -18.24768,-39.48151 0.52216,-1.88836 1.02899,-6.87695 -2.58722,-5.65503 -10.70996,3.61878 -4.2016,27.60431 -3.1651,34.6543 -29.21552,1.17371 -43.31226,-24.55817 -32.54633,-51 8.59882,-21.11914 32.86951,-36.72638 55.54633,-36.99615 25.90643,-0.30817 52.93567,4.69573 68.47687,27.99615 17.05096,25.56396 4.15039,60.91016 -28.47687,61 z"
-                id="path14"
-                inkscape:label="Paw - Right"
-              />
-              <path
-                style="
-                  display: inline;
-                  opacity: 1;
-                  fill: #ffe6d6;
-                  fill-opacity: 1;
-                  stroke: none;
-                "
-                d="m 146.16737,554.78178 c 2.18011,-9.53259 4.19315,-18.23413 1.76001,-28 -0.52866,-2.12183 -3.49075,-10.49304 -7.05631,-7.24847 -2.56118,2.33062 2.48002,16.23944 2.20524,20.24847 -1.39176,20.30481 -21.65394,30.04578 -39.90894,23.28937 -13.406521,-4.96198 -17.746371,-19.16449 -15.384251,-32.28937 0.38614,-2.14557 4.46927,-12.36334 -0.50076,-11.88269 -3.16321,0.30585 -4.29733,5.45221 -4.95605,7.88269 -2.49228,9.19604 -0.38773,17.87488 0.84106,27 -29.62421,2.31836 -42.7892,-26.58398 -31.5602,-52 9.7025,-21.96094 35.23525,-35.41382 58.560201,-35.98535 24.78464,-0.6073 51.75824,7.5899 65.23996,29.98535 15.20459,25.25745 2.27457,58.91321 -29.23996,59"
-                id="path13"
-              />
-              <path
-                style="
-                  display: inline;
-                  opacity: 1;
-                  fill: #ffe6d6;
-                  fill-opacity: 1;
-                  stroke: none;
-                "
-                d="m 545.16737,458.78178 c -23.38428,0.0644 -46.12775,11.09644 -60.07562,30 -4.50745,6.10895 -7.41925,12.73413 -9.49689,20 -0.86169,3.01343 -1.13116,7.60803 -4.65509,8.68213 -7.6557,2.33325 -18.77484,0.31787 -26.7724,0.31787 h -60 -196 c -1.6297,-37.85413 -37.29495,-53.09308 -69,-59 0,-6.64111 -0.0156,-12.7821 2.6767,-19 2.24685,-5.18909 5.41858,-9.94043 9.36343,-13.98535 25.6868,-26.3382 55.31799,-9.82172 85.95987,-17.25385 22.32623,-5.41522 43.98938,-24.67138 58.40973,-41.7608 38.23285,-45.30933 31.43414,-107.7207 37.64044,-163 1.76022,-15.6781 3.8707,-31.55255 7.16049,-47 0.97184,-4.56329 2.1612,-13.28113 7.00309,-15.39661 11.40209,-4.98169 17.98272,2.47681 20.6311,12.39661 4.6029,17.24078 5.77942,35.35205 7.86963,53 5.29864,44.73737 -0.67749,94.45673 20.09417,136 8.12964,16.25928 20.79627,29.7746 34.19135,41.82947 11.66345,10.49652 26.40076,20.60126 42,23.88428 11.82025,2.48767 23.15967,-0.84449 35,-0.69526 22.0694,0.27814 46.46051,10.57819 55.66205,31.98151 2.6383,6.13684 2.33795,12.4668 2.33795,19"
-                id="path6"
-                inkscape:label="Face - Center"
-              />
-              <path
-                style="display: inline; fill: #552200; stroke: none"
-                d="m 327.16737,423.78178 c -9.84048,18.44861 -36.18134,21.90448 -52.99924,10.63733 -5.14184,-3.44476 -10.39038,-16.81287 -16.94598,-15.30017 -7.13129,1.64551 -2.60089,11.76105 -0.37113,15.66284 5.52152,9.66193 16.32605,16.10107 27.31635,17 1.79382,13.89026 4.66379,28.76282 13.51776,40 15.86945,20.14099 47.3067,22.80725 66.47839,5.81482 8.08661,-7.16742 13.55921,-17.38519 16.10566,-27.81482 1.13549,-4.65063 0.53094,-11.67163 3.07721,-15.72223 2.25109,-3.58111 8.23065,-4.3316 11.82098,-6.06329 8.07593,-3.89514 20.15668,-14.79682 17.66742,-25.17053 -0.96582,-4.02509 -5.17566,-5.39228 -8.25232,-2.59485 -5.19623,4.72461 -6.99786,11.3435 -13.4151,15.41742 -15.48193,9.82849 -42.22827,5.8023 -50,-11.86652 17.42853,-4.90924 34.81445,-14.00616 40.21143,-33 7.55493,-26.58844 -26.65967,-43.36176 -48.21143,-42.94598 -26.89856,0.51892 -59.98386,23.87103 -41.77081,52.94598 2.72506,4.35028 5.92221,8.40259 9.77466,11.81482 7.54531,6.68304 16.53067,8.85217 25.99615,11.18518"
-                id="path11"
-                inkscape:label="Nose"
-              />
-              <path
-                style="fill: #d35f5f; stroke: none"
-                d="m 329.16737,445.78178 c 0,4.29059 -2.5076,27.16034 4.94598,26.07874 6.8689,-0.99683 4.05402,-21.14594 4.05402,-26.07874 6.78137,1.93866 12.96051,4.88983 20,6.07947 2.57831,0.43573 7.20532,0.27521 8.97223,2.52313 2.61755,3.33014 1.23987,12.59943 0.26697,16.3974 -4.01313,15.66583 -17.69452,28.19 -34.2392,27.98145 -16.87054,-0.21265 -31.24158,-13.30628 -33.69907,-29.98145 -0.51751,-3.51166 -1.62164,-11.42389 0.72684,-14.39661 1.77826,-2.25097 6.39774,-1.89923 8.97223,-2.41125 6.92191,-1.37671 13.24451,-4.34448 20,-6.19214"
-                id="path12"
-                inkscape:label="Tongue"
-              />
-              <path
-                style="fill: #e9afaf; stroke: none"
-                d="m 117.16737,265.78178 c -12.29187,-8.66437 -19.836701,-24.38525 -25.396611,-38 -12.03805,-29.47809 -17.60339,-59.20612 -17.60339,-91 0,-12.93604 0.89212,-42.546331 17.00385,-46.581051 9.842071,-2.46467 20.509551,4.7572 27.996151,10.221491 19.28555,14.07611 34.30518,32.72724 46.14969,53.35956 3.81665,6.64832 14.40015,22.04254 10.78317,30 -4.91418,10.8114 -19.23236,19.64252 -26.73303,29 -13.32657,16.62561 -21.599,34.83423 -32.19983,53"
-                id="path5"
-                inkscape:label="Inner Ear - Right"
-              />
-              <path
-                style="fill: #e9afaf; stroke: none"
-                d="m 548.16737,266.78178 c -7.17657,-21.21313 -19.09344,-41.52679 -33.00385,-59 -6.07763,-7.63428 -20.86602,-17.92047 -23.58953,-27 -2.219,-7.39758 9.10022,-22.12158 12.9375,-28 13.80859,-21.15381 31.62786,-42.18878 53.65588,-55.138921 7.55786,-4.44323 18.96368,-11.21557 27.99615,-7.20446 14.26819,6.33618 13.30396,32.494011 12.9892,45.343381 -0.83697,34.16766 -10.93542,68.61957 -26.23303,99 -5.47907,10.88123 -13.28113,26.6499 -24.75232,32"
-                id="path4"
-                inkscape:label="Inner Ear - Right"
-              />
-              <path
-                style="fill: #fa914c; fill-opacity: 1; stroke: none"
-                d="m 317.16737,140.78178 c -4.5928,34.1062 -11.53299,67.4762 -13.91049,102 -2.45435,35.63965 -2.22568,75.93158 -22.43442,107 -14.64984,22.52228 -40.76193,49.16864 -68.65509,53.56097 -24.66724,3.88434 -48.86661,-6.18072 -72,7.90278 -11.35172,6.91088 -20.83871,17.93933 -25.30093,30.53625 -1.67582,4.73083 -1.09739,11.27917 -3.30167,15.56635 -1.56458,3.04296 -7.38239,2.92486 -10.21222,2.11578 -7.881221,-2.25354 -13.115631,-19.52979 -11.497681,-26.68213 0.87393,-3.8634 5.74335,-8.9425 3.57562,-12.82947 -5.80169,-10.40307 -19.80627,-14.47314 -23.61419,-27.17053 -3.24926,-10.83453 7.77581,-14.40436 14.35107,-20.18445 7.64307,-6.71875 12.90677,-14.68091 17.219151,-23.81555 9.25973,-19.61432 11.16436,-42.17523 16.66513,-63 4.41736,-16.72321 12.42178,-33.35217 21.54086,-48 8.44104,-13.55872 18.31455,-26.65442 29.57871,-37.99921 4.13656,-4.1662 14.60964,-9.92144 15.50463,-16.01544 1.19977,-8.169 -6.16998,-20.01288 -9.76696,-26.98535 -12.89414,-24.99426 -31.25766,-48.58276 -54.74152,-64.329471 -15.78461,-10.5841 -34.973541,-16.30426 -45.391201,4.32947 -7.0019,13.868291 -7.6088,29.806031 -7.6088,45.000001 0,33.36951 6.98386,67.02942 21.96915,97 4.16275,8.3255 9.01831,16.72473 14.838711,24 2.79804,3.49738 8.34796,7.47028 9.26312,12 1.96048,9.70374 -6.6224,24.58038 -7.07098,35 -17.577361,-8.14856 -30.602231,-30.97101 -40.199841,-47 -29.17644,-48.72766 -43.13329,-108.4187 -35.071,-165.000001 3.52374,-24.72968 10.4198,-67.132446 40.27084,-72.904297 16.33929,-3.159302 32.187101,4.705322 46.000001,12.624207 34.21176,19.61353 63.42892,53.86102 87.80017,84.280091 5.98679,7.47241 11.74118,15.1134 17.17438,23 2.37289,3.4444 4.60565,8.89197 8.23532,11.16437 5.27527,3.30261 18.13052,-4.07758 23.79013,-5.53473 20.25989,-5.21625 42.0246,-9.62726 63,-9.62964"
-                id="path3"
-                inkscape:label="Face - Left"
-              />
-              <path
-                style="fill: #552200; stroke: none"
-                d="m 223.16737,308.24937 c -38.00375,7.18195 -30.47116,80.48358 10,72.91357 38.19183,-7.14367 31.66357,-80.78717 -10,-72.91357"
-                id="path8"
-                inkscape:label="Eye - Left"
-              />
-              <path
-                style="fill: #ffffff; stroke: none"
-                d="m 228.31311,336.73278 c 10.09216,-1.94611 12.34387,16.92108 2.94135,19.03009 -10.73648,2.4082 -13.00238,-17.08997 -2.94135,-19.03009"
-                id="path9"
-                inkscape:label="Eyeball - Left"
-              />
-              <path
-                style="fill: #fa914c; fill-opacity: 1; stroke: none"
-                d="m 559.16737,309.78178 c -1.73499,-8.94635 -9.04004,-25.34607 -7.09644,-34 1.91968,-8.54742 15.72016,-19.047 20.67127,-27 12.29321,-19.74658 21.26733,-42.33746 26.41437,-65 5.20306,-22.90918 8.63037,-46.55688 5.96063,-70 -1.17218,-10.29279 -4.62946,-23.155641 -13.95368,-29.005371 -13.01702,-8.16651 -30.23748,2.00879 -40.99615,9.59564 -27.42065,19.336671 -55.53741,51.049321 -66.36188,83.409731 -2.57519,7.69873 6.6283,12.37543 11.36109,17.01465 12.25287,12.01062 22.20837,26.33105 31.00079,40.98535 10.23248,17.05438 18.21307,35.53564 22.57483,55 4.37506,19.52362 5.62787,40.8653 14.69525,59 4.26984,8.53961 10.15961,16.45026 17.72992,22.32019 5.28992,4.10175 14.34485,7.86939 14.60107,15.67981 0.49799,15.18066 -18.45398,21.47882 -24.93902,32.17053 -2.62049,4.32038 3.58868,10.11884 3.94671,14.82947 0.50843,6.68976 -4.99365,21.84296 -11.79321,24.3573 -3.08899,1.14221 -7.55035,-0.28992 -10.81555,-0.3573 -0.0201,-30.34235 -25.70953,-52.99579 -55,-55.83026 -15.19971,-1.47089 -31.16443,3.16669 -46,-0.64813 -22.41473,-5.76374 -43.41205,-24.82038 -57.33099,-42.52161 -21.40631,-27.22321 -24.47998,-60.76019 -26.75849,-94 -2.87079,-41.88013 -4.81103,-84.31903 -15.91052,-125 20.31281,0.056 41.54065,4.7041 61,10.29089 5.82916,1.67353 18.41968,8.65625 23.90973,5.09027 10.61597,-6.89538 18.81183,-23.78369 27.24536,-33.38116 26.78082,-30.476751 55.94586,-59.725161 89.84491,-82.333314 15.58112,-10.391479 33.46802,-20.602661 53,-17.341064 32.27679,5.389831 34.14685,47.712467 37.42438,72.674377 1.96234,14.945071 -0.66199,31.087831 -2.25849,46.000001 -4.64013,43.34125 -17.13488,87.1496 -40.85803,124 -9.95215,15.45917 -23.78583,36.58301 -41.30786,44"
-                id="path2"
-                inkscape:label="Face - Right"
-              />
-              <path
-                style="fill: #552200; stroke: none"
-                d="m 437.16737,307.49321 c -39.89758,0.53106 -39.49432,74.20983 0,74.20983 39.9884,0 40.60052,-74.75024 0,-74.20983"
-                id="path7"
-                inkscape:label="Eye - Right"
-              />
-              <path
-                style="fill: #ffffff; stroke: none"
-                d="m 436.08027,336.42389 c 10.89435,-3.10956 13.86847,15.76703 3.94135,18.14819 -10.69007,2.56415 -13.64105,-15.37958 -3.94135,-18.14819"
-                id="path10"
-                inkscape:label="Eyeball - Right"
-              />
-            </svg>
+                <div class="tl-wrap">
+                    <div class="tl-track" aria-hidden="true">
+                        <div class="tl-progress" aria-hidden="true"></div>
+                    </div>
 
-            <!-- WHY US -->
+                    <ol class="timeline-rail">
+                        <li class="tl-step">
+                            <span class="tl-dot" aria-hidden="true"></span>
+                            <div class="tl-card">
+                                <div class="tl-icon" aria-hidden="true">
+                                    <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                    >
+                                        <circle cx="11" cy="11" r="7"/>
+                                        <path d="M21 21l-4.3-4.3"/>
+                                    </svg>
+                                </div>
+                                <h3>1. Znajdź usługę</h3>
+                                <p>
+                                    Wpisz czego potrzebuje Twój pupil i wybierz lokalizację.
+                                </p>
+                            </div>
+                        </li>
 
-            <div class="why-us-grid">
-              <article class="why-us-card">
-                <img
-                  src="./assets/gifs/calendar.gif"
-                  alt="Kalendarz"
-                  loading="lazy"
-                />
-                <div class="heading2B">Wygodna rezerwacja</div>
-                <div class="body text-neutral">
-                  Rezerwuj, zmień termin wizyty lub odwołaj w razie potrzeby -
-                  wszystko wykonasz wygodnie w aplikacji
+                        <li class="tl-step">
+                            <span class="tl-dot" aria-hidden="true"></span>
+                            <div class="tl-card">
+                                <div class="tl-icon" aria-hidden="true">
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                    >
+                                        <g fill="currentColor">
+                                            <path
+                                                    d="M16 2a1 1 0 0 1 .993.883L17 3v1h1a3 3 0 0 1 2.995 2.824L21 7v12a3 3 0 0 1-2.824 2.995L18 22H6a3 3 0 0 1-2.995-2.824L3 19V7a3 3 0 0 1 2.824-2.995L6 4h1V3a1 1 0 0 1 1.993-.117L9 3v1h6V3a1 1 0 0 1 1-1m3 7H5v9.625c0 .705.386 1.286.883 1.366L6 20h12c.513 0 .936-.53.993-1.215l.007-.16z"
+                                            />
+                                            <path
+                                                    d="M12 12a1 1 0 0 1 .993.883L13 13v3a1 1 0 0 1-1.993.117L11 16v-2a1 1 0 0 1-.117-1.993L11 12z"
+                                            />
+                                        </g>
+                                    </svg>
+                                </div>
+                                <h3>2. Wybierz termin i cenę</h3>
+                                <p>
+                                    Porównaj specjalistów, opinie, dostępne godziny i ceny.
+                                </p>
+                            </div>
+                        </li>
+
+                        <li class="tl-step">
+                            <span class="tl-dot" aria-hidden="true"></span>
+                            <div class="tl-card">
+                                <div class="tl-icon" aria-hidden="true">
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                    >
+                                        <g
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                        >
+                                            <path
+                                                    stroke-dasharray="64"
+                                                    stroke-dashoffset="64"
+                                                    d="M3 12c0 -4.97 4.03 -9 9 -9c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9c-4.97 0 -9 -4.03 -9 -9Z"
+                                            >
+                                                <animate
+                                                        fill="freeze"
+                                                        attributeName="stroke-dashoffset"
+                                                        dur="0.6s"
+                                                        values="64;0"
+                                                />
+                                            </path>
+                                            <path
+                                                    stroke-dasharray="14"
+                                                    stroke-dashoffset="14"
+                                                    d="M8 12l3 3l5 -5"
+                                            >
+                                                <animate
+                                                        fill="freeze"
+                                                        attributeName="stroke-dashoffset"
+                                                        begin="0.6s"
+                                                        dur="0.2s"
+                                                        values="14;0"
+                                                />
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <h3>3. Rezerwuj i gotowe</h3>
+                                <p>Otrzymasz potwierdzenie i przypomnienia przed wizytą.</p>
+                            </div>
+                        </li>
+                    </ol>
                 </div>
-              </article>
-
-              <article class="why-us-card">
-                <img src="./assets/gifs/report.gif" alt="Raport" loading="lazy" />
-                <div class="heading2B">Historia leczenia</div>
-                <div class="body text-neutral">
-                  Wszystkie dane medyczne Twojego pupila w jednym miejscu
-                </div>
-              </article>
-
-              <article class="why-us-card">
-                <img
-                  src="./assets/gifs/payment.gif"
-                  alt="Platnosc online"
-                  loading="lazy"
-                />
-                <div class="heading2B">Płatności online</div>
-                <div class="body text-neutral">
-                  Za wizytę zapłacisz szybko, bezpiecznie i wygodnie
-                </div>
-              </article>
-
-              <article class="why-us-card">
-                <img
-                  src="./assets/gifs/notification.gif"
-                  alt="Powiadomienia"
-                  loading="lazy"
-                />
-                <div class="heading2B">Przypomnienia</div>
-                <div class="body text-neutral">
-                  Nie przegapisz już żadnej wizyty ani szczepienia - aplikacja
-                  przypomni Ci o wszystkich ważnych sprawach związanych z
-                  pupilem
-                </div>
-              </article>
-
-              <article class="why-us-card">
-                <img src="./assets/gifs/rating.gif" alt="Oceny" loading="lazy" />
-                <div class="heading2B">System ocen</div>
-                <div class="body text-neutral">
-                  Sprawdź opinie o weterynarzu i oceń swoje wizyty - łatwiej
-                  wybierzesz najlepszego specjalistę dla swojego pupila
-                </div>
-              </article>
-
-              <article class="why-us-card">
-                <img
-                  src="./assets/gifs/24h.gif"
-                  alt="Calkodobowa pomoc"
-                  loading="lazy"
-                />
-                <div class="heading2B">Dyżury nocne</div>
-                <div class="body text-neutral">
-                  W nagłej sytuacji aplikacja pomoże Ci znaleźć pomoc, nawet w
-                  godzinach nocnych
-                </div>
-              </article>
-
-              <article class="why-us-card">
-                <img
-                  src="./assets/gifs/message.gif"
-                  alt="Wiadomosci"
-                  loading="lazy"
-                />
-                <div class="heading2B">Kontakt z lekarzem</div>
-                <div class="body text-neutral">
-                  W razie potrzeby po wizycie możesz zadać dodatkowe pytania
-                  lekarzowi
-                </div>
-              </article>
-
-              <article class="why-us-card">
-                <img
-                  src="./assets/gifs/prescription.gif"
-                  alt="Recepta"
-                  loading="lazy"
-                />
-                <div class="heading2B">E-recepty</div>
-                <div class="body text-neutral">
-                  Otrzymuj recepty bez wychodzenia z domu - kilka kliknięć, a
-                  leki możesz odebrać w wybranej aptece
-                </div>
-              </article>
             </div>
-          </div>
+            <!-- /Animated timeline -->
         </div>
-      </section>
+    </section>
 
-      <!-- DLA KOGO -->
-      <section class="section" id="dlakogo">
+    <!-- USŁUGI -->
+    <section class="section" id="uslugi">
         <div class="container">
-          <div class="reveal" style="text-align: center; margin-bottom: 24px">
-            <h2>Dla kogo jest Zoovi?</h2>
-            <p>
-              Tworzymy doświadczenie wygodne dla właścicieli i przyjazne dla
-              zwierzaków — a specjalistom dajemy nowe możliwości.
-            </p>
-          </div>
-          <div class="split">
-            <div class="panel reveal">
-              <h3>Właściciele pupili</h3>
-              <ul>
-                <li>Wszystko w jednej aplikacji</li>
-                <li>Szybka rezerwacja i płatność</li>
-                <li>Historia leczenia w jednym miejscu</li>
-                <li>Rekomendacje dopasowane do potrzeb</li>
-              </ul>
-              <div class="cta-row" style="margin-top: 12px">
-                <a class="btn primary" href="#pobierz">Pobierz aplikację</a>
-              </div>
+            <div class="reveal" style="text-align: center; margin-bottom: 24px">
+                <h2>Najważniejsze kategorie usług</h2>
+                <p>Sprawdź, co możesz wygodnie zarezerwować przez Zoovi.</p>
             </div>
-            <div class="panel reveal" id="specjalisci">
-              <h3>Specjaliści</h3>
-              <ul>
-                <li>Porządkowanie wizyt</li>
-                <li>Kalendarz online i automatyczne przypomnienia</li>
-                <li>Nowi klienci w Twojej okolicy</li>
-                <li>Informacje o zwierzęciu</li>
-              </ul>
-              <div class="cta-row" style="margin-top: 12px">
-                <a class="btn secondary" href="#kontakt"
-                  >Dołącz jako specjalista</a
-                >
-              </div>
+            <div class="cards">
+                <article class="card-service reveal" aria-labelledby="vet">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                            <g fill="#13A38B">
+                                <path
+                                        fill-rule="evenodd"
+                                        d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
+                                        clip-rule="evenodd"
+                                />
+                                <path
+                                        d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
+                                />
+                                <path
+                                        d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
+                                />
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 id="vet">Weterynaria</h3>
+                    <p>Konsultacje, szczepienia, badania i pilne wizyty.</p>
+                    <ul>
+                        <li>Zweryfikowane gabinety</li>
+                        <li>Oceny i opinie właścicieli</li>
+                        <li>Przejrzyste ceny i dostępność</li>
+                    </ul>
+                    <div class="actions">
+                        <a class="btn primary" href="#pobierz">Zarezerwuj</a>
+                        <a class="btn link" href="#faq">Dowiedz się więcej</a>
+                    </div>
+                </article>
+                <article class="card-service reveal" aria-labelledby="groom">
+                    <div class="icon">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#13A38B"
+                                viewBox="0 0 24 24"
+                        >
+                            <path
+                                    d="M16 23q-.425 0-.712-.288T15 22t.288-.712T16 21h3v-1h-3q-.425 0-.712-.288T15 19t.288-.712T16 18h3v-1h-3q-.425 0-.712-.288T15 16t.288-.712T16 15h3v-1h-3q-.425 0-.712-.288T15 13t.288-.712T16 12h3v-1h-3q-.425 0-.712-.288T15 10t.288-.712T16 9h3V8h-3q-.425 0-.712-.288T15 7t.288-.712T16 6h4q.825 0 1.413.588T22 8v13q0 .825-.587 1.413T20 23zm-8-8q1.65 0 2.825-1.625T12 9.5t-1.175-3.875T8 4T5.175 5.625T4 9.5t1.175 3.875T8 15m0 8q-1.2 0-1.975-.888t-.6-2.087l.4-3.525q-1.7-.825-2.762-2.713T2 9.5q0-3.125 1.75-5.312T8 2t4.25 2.188T14 9.5q0 2.4-1.062 4.288T10.175 16.5l.4 3.525q.175 1.2-.6 2.088T8 23"
+                            />
+                        </svg>
+                    </div>
+                    <h3 id="groom">Pielęgnacja</h3>
+                    <p>Strzyżenie, kąpiel, trymowanie i pielęgnacja pazurów.</p>
+                    <ul>
+                        <li>Portfolio i galeria efektów</li>
+                        <li>Różne pakiety usług</li>
+                        <li>Szybka zmiana terminu</li>
+                    </ul>
+                    <div class="actions">
+                        <a class="btn primary" href="#pobierz">Zarezerwuj</a>
+                        <a class="btn link" href="#faq">Dowiedz się więcej</a>
+                    </div>
+                </article>
+                <article class="card-service reveal" aria-labelledby="care">
+                    <div class="icon">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="#13A38B"
+                        >
+                            <path
+                                    d="M14 20.408c-.492.308-.903.546-1.192.709q-.23.129-.463.252h-.002a.75.75 0 0 1-.686 0a17 17 0 0 1-.465-.252a31 31 0 0 1-4.803-3.34C3.8 15.572 1 12.331 1 8.513C1 5.052 3.829 2.5 6.736 2.5C9.03 2.5 10.881 3.726 12 5.605C13.12 3.726 14.97 2.5 17.264 2.5C20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262A31 31 0 0 1 14 20.408"
+                            />
+                        </svg>
+                    </div>
+                    <h3 id="care">Opieka</h3>
+                    <p>Petsitting, spacery i hotele dla zwierząt.</p>
+                    <ul>
+                        <li>Sprawdzeni opiekunowie</li>
+                        <li>Ubezpieczenie i wsparcie</li>
+                        <li>Godziny dopasowane do Ciebie</li>
+                    </ul>
+                    <div class="actions">
+                        <a class="btn primary" href="#pobierz">Zarezerwuj</a>
+                        <a class="btn link" href="#faq">Dowiedz się więcej</a>
+                    </div>
+                </article>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!-- FAQ -->
-      <section class="section" id="faq">
-        <div class="container faq">
-          <div class="reveal" style="text-align: center; margin-bottom: 24px">
-            <h2>Najczęstsze pytania</h2>
-          </div>
-          <details class="reveal">
-            <summary>Jak działają rezerwacje i płatności?</summary>
-            <p>
-              Wybierasz usługę i termin, a następnie potwierdzasz rezerwację.
-              Płatność możesz wykonać online lub na miejscu — zależnie od
-              specjalisty.
-            </p>
-          </details>
-          <details class="reveal">
-            <summary>Czy specjaliści są weryfikowani?</summary>
-            <p>
-              Tak. Współpracujemy z zweryfikowanymi specjalistami, bazując na
-              dokumentach i ocenach użytkowników.
-            </p>
-          </details>
-          <details class="reveal">
-            <summary>Czy mogę odwołać lub zmienić termin?</summary>
-            <p>
-              Oczywiście. W aplikacji znajdziesz przejrzystą politykę odwołań
-              oraz możliwość szybkiej zmiany terminu.
-            </p>
-          </details>
-          <details class="reveal">
-            <summary>Na jakich urządzeniach działa Zoovi?</summary>
-            <p>
-              Na telefonach i tabletach z iOS i Androidem, a wkrótce także w
-              wersji webowej.
-            </p>
-          </details>
-        </div>
-      </section>
-
-      <!-- CTA FINAL -->
-      <section class="section" id="pobierz">
+    <!-- DLACZEGO ZOOVI -->
+    <section class="section">
         <div class="container">
-          <div class="cta-final reveal surface">
-            <div style="display: grid; gap: 10px; align-items: center">
-              <h2 style="color: white; margin: 0">
-                Gotowy, by ułatwić sobie opiekę nad pupilem?
-              </h2>
-              <p style="color: #e2f7f3; margin: 0 0 8px">
-                Dołącz do Zoovi i rezerwuj usługi w kilka kliknięć.
-              </p>
-              <div class="cta-row">
-                <a
-                  class="btn"
-                  style="background: white; color: #0f172a"
-                  href="#"
-                  aria-label="Pobierz w sklepie z aplikacjami"
+            <div class="reveal" style="text-align: center; margin-bottom: 24px">
+                <h2>Dlaczego Zoovi</h2>
+                <p>Korzyści, które docenisz od pierwszej rezerwacji.</p>
+            </div>
+            <div class="why-us-layout">
+                <svg
+                        class="why-us-illustration"
+                        id="corgi-svg"
+                        viewBox="0 0 670 585"
+                        xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
                     <path
-                      d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                            style="display:inline;fill:#552200;stroke:none;stroke-width:1.00157;stroke-dasharray:none"
+                            d="m 598.17518,14.668498 c -12.93373,0.400623 -25.58661,6.059433 -37.00781,11.86914 -36.57526,18.604981 -69.00763,51.741641 -95.71484,82.244142 -7.96759,9.09979 -15.59283,18.49811 -23.07422,28 -2.67682,3.39978 -6.07355,10.15198 -10.38086,11.59375 -3.80969,1.27521 -10.112,-2.42341 -13.83008,-3.44141 -11.82092,-3.23657 -23.91296,-6.03521 -36,-8.07226 -33.57159,-5.65795 -67.47122,-5.11908 -101,0.50586 -11.48688,1.92712 -22.80298,4.34424 -34,7.55468 -3.90091,1.11846 -9.95161,4.58014 -13.81641,2.16211 C 222.96723,140.58793 213.87718,121.55357 206.2826,111.78178 181.8281,80.316749 150.16984,44.848909 114.16737,26.537638 99.203589,18.92692 80.873759,11.884868 64.167369,18.248576 c -30.07431,11.45575 -38.13511,52.222903 -41.16602,80.533203 -6.44005,60.153261 6.69487,120.643251 39.21875,172.000001 9.85353,15.5592 24.84967,39.02667 41.947271,47 -3.71115,13.17511 -6.565371,26.45929 -14.359381,38 -6.79824,10.06628 -19.58506,14.89142 -25.63085,25 -8.55961,14.31171 10.80377,35.84021 22.99023,41 -7.76263,13.65619 -2.66748,28.06934 6,40 -16.75201,4.75574 -32.00391,13.20911 -41.91016,28 -4.04439,6.03857 -10.08984,35.00003 -10.08984,35.00003 0.73996,17.18933 11.19315,31.43774 28,35.84375 5.58545,1.46423 11.59384,-0.034 17,1.51563 7.46317,2.13935 12.82004,7.58788 21.000001,8.46679 14.61435,1.57019 22.15723,-4.27673 35,-8.55273 5.18045,-1.72479 11.50067,-0.47602 17,-2.01953 16.11584,-4.52326 27.63513,-18.54358 29,-35.25391 h 189 62 c 9.63586,0 20.47174,-1.3974 29.98047,0.14844 5.76593,0.93732 5.29882,7.36761 6.76953,11.85156 2.12524,6.47961 6.01532,12.29822 11.25391,16.67188 10.24365,8.55249 19.32592,5.91601 30.99609,8.33984 11.38977,2.3656 18.29456,9.0495 31,8.98828 10.74072,-0.0518 16.58167,-5.38562 26,-8.70312 12.18762,-4.29297 23.00037,-0.55958 33.91016,-10.59766 4.86639,-4.4776 9.75097,-10.17407 10.39062,-16.69922 1.10258,-11.24762 2.44976,-8.28864 2.69922,-17 -2.20941,-27.75989 -24.41821,-49.84741 -51,-56 7.53101,-12.76996 13.98822,-25.80933 6,-40 5.39758,-2.40576 9.89489,-6.6167 13.82617,-11 6.91546,-7.71064 15.09205,-20.30194 9.7168,-31 -3.70251,-7.36883 -12.63825,-10.84333 -18.53906,-16.17383 -7.68042,-6.93811 -12.67999,-16.11719 -16,-25.82617 -1.61389,-4.71967 -5.77454,-13.03681 -3.80274,-17.99609 2.72962,-6.86524 12.64167,-11.77252 17.62891,-17.04297 11.06793,-11.69644 20.82727,-24.37955 29.47461,-37.96097 32.26672,-50.67773 46.81506,-121.49634 40.86523,-181.000001 -2.57141,-25.71619 -10.67242,-59.531556 -39.16992,-67.572266 -4.33841,-1.224106 -8.68094,-1.674556 -12.99219,-1.541015 z"
                     />
-                  </svg>
-                  Pobierz aplikację
-                </a>
-                <a
-                  class="btn"
-                  style="background: #0f172a; color: white"
-                  href="#jak"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 48 48"
-                  >
-                    <g fill="#FFFFFF">
-                      <path
-                        fill-rule="evenodd"
-                        d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
-                        clip-rule="evenodd"
-                      ></path>
-                      <path
-                        d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
-                      ></path>
-                      <path
-                        d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
-                      ></path>
-                    </g>
-                  </svg>
-                  Zostań partnerem
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+                    <path
+                            style="display:inline;opacity:1;fill:#ffe6d6;fill-opacity:1;stroke:none"
+                            d="m 579.16737,554.78178 c 2.46967,-9.23853 4.44415,-18.41895 2.10028,-28 -0.50439,-2.06171 -2.87414,-10.35126 -6.47217,-7.24847 -2.97961,2.56951 1.51282,16.1314 1.33252,20.24847 -0.83398,19.04663 -18.41211,28.2262 -35.96063,24.48224 -19.20605,-4.0976 -22.79352,-23.04218 -18.24768,-39.48151 0.52216,-1.88836 1.02899,-6.87695 -2.58722,-5.65503 -10.70996,3.61878 -4.2016,27.60431 -3.1651,34.6543 -29.21552,1.17371 -43.31226,-24.55817 -32.54633,-51 8.59882,-21.11914 32.86951,-36.72638 55.54633,-36.99615 25.90643,-0.30817 52.93567,4.69573 68.47687,27.99615 17.05096,25.56396 4.15039,60.91016 -28.47687,61 z"
+                    />
+                    <path
+                            style="display:inline;opacity:1;fill:#ffe6d6;fill-opacity:1;stroke:none"
+                            d="m 146.16737,554.78178 c 2.18011,-9.53259 4.19315,-18.23413 1.76001,-28 -0.52866,-2.12183 -3.49075,-10.49304 -7.05631,-7.24847 -2.56118,2.33062 2.48002,16.23944 2.20524,20.24847 -1.39176,20.30481 -21.65394,30.04578 -39.90894,23.28937 -13.406521,-4.96198 -17.746371,-19.16449 -15.384251,-32.28937 0.38614,-2.14557 4.46927,-12.36334 -0.50076,-11.88269 -3.16321,0.30585 -4.29733,5.45221 -4.95605,7.88269 -2.49228,9.19604 -0.38773,17.87488 0.84106,27 -29.62421,2.31836 -42.7892,-26.58398 -31.5602,-52 9.7025,-21.96094 35.23525,-35.41382 58.560201,-35.98535 24.78464,-0.6073 51.75824,7.5899 65.23996,29.98535 15.20459,25.25745 2.27457,58.91321 -29.23996,59"
+                    />
+                    <path
+                            style="display:inline;opacity:1;fill:#ffe6d6;fill-opacity:1;stroke:none"
+                            d="m 545.16737,458.78178 c -23.38428,0.0644 -46.12775,11.09644 -60.07562,30 -4.50745,6.10895 -7.41925,12.73413 -9.49689,20 -0.86169,3.01343 -1.13116,7.60803 -4.65509,8.68213 -7.6557,2.33325 -18.77484,0.31787 -26.7724,0.31787 h -60 -196 c -1.6297,-37.85413 -37.29495,-53.09308 -69,-59 0,-6.64111 -0.0156,-12.7821 2.6767,-19 2.24685,-5.18909 5.41858,-9.94043 9.36343,-13.98535 25.6868,-26.3382 55.31799,-9.82172 85.95987,-17.25385 22.32623,-5.41522 43.98938,-24.67138 58.40973,-41.7608 38.23285,-45.30933 31.43414,-107.7207 37.64044,-163 1.76022,-15.6781 3.8707,-31.55255 7.16049,-47 0.97184,-4.56329 2.1612,-13.28113 7.00309,-15.39661 11.40209,-4.98169 17.98272,2.47681 20.6311,12.39661 4.6029,17.24078 5.77942,35.35205 7.86963,53 5.29864,44.73737 -0.67749,94.45673 20.09417,136 8.12964,16.25928 20.79627,29.7746 34.19135,41.82947 11.66345,10.49652 26.40076,20.60126 42,23.88428 11.82025,2.48767 23.15967,-0.84449 35,-0.69526 22.0694,0.27814 46.46051,10.57819 55.66205,31.98151 2.6383,6.13684 2.33795,12.4668 2.33795,19"
+                    />
+                    <path
+                            style="display:inline;fill:#552200;stroke:none"
+                            d="m 327.16737,423.78178 c -9.84048,18.44861 -36.18134,21.90448 -52.99924,10.63733 -5.14184,-3.44476 -10.39038,-16.81287 -16.94598,-15.30017 -7.13129,1.64551 -2.60089,11.76105 -0.37113,15.66284 5.52152,9.66193 16.32605,16.10107 27.31635,17 1.79382,13.89026 4.66379,28.76282 13.51776,40 15.86945,20.14099 47.3067,22.80725 66.47839,5.81482 8.08661,-7.16742 13.55921,-17.38519 16.10566,-27.81482 1.13549,-4.65063 0.53094,-11.67163 3.07721,-15.72223 2.25109,-3.58111 8.23065,-4.3316 11.82098,-6.06329 8.07593,-3.89514 20.15668,-14.79682 17.66742,-25.17053 -0.96582,-4.02509 -5.17566,-5.39228 -8.25232,-2.59485 -5.19623,4.72461 -6.99786,11.3435 -13.4151,15.41742 -15.48193,9.82849 -42.22827,5.8023 -50,-11.86652 17.42853,-4.90924 34.81445,-14.00616 40.21143,-33 7.55493,-26.58844 -26.65967,-43.36176 -48.21143,-42.94598 -26.89856,0.51892 -59.98386,23.87103 -41.77081,52.94598 2.72506,4.35028 5.92221,8.40259 9.77466,11.81482 7.54531,6.68304 16.53067,8.85217 25.99615,11.18518"
+                    />
+                    <path
+                            style="fill:#d35f5f;stroke:none"
+                            d="m 329.16737,445.78178 c 0,4.29059 -2.5076,27.16034 4.94598,26.07874 6.8689,-0.99683 4.05402,-21.14594 4.05402,-26.07874 6.78137,1.93866 12.96051,4.88983 20,6.07947 2.57831,0.43573 7.20532,0.27521 8.97223,2.52313 2.61755,3.33014 1.23987,12.59943 0.26697,16.3974 -4.01313,15.66583 -17.69452,28.19 -34.2392,27.98145 -16.87054,-0.21265 -31.24158,-13.30628 -33.69907,-29.98145 -0.51751,-3.51166 -1.62164,-11.42389 0.72684,-14.39661 1.77826,-2.25097 6.39774,-1.89923 8.97223,-2.41125 6.92191,-1.37671 13.24451,-4.34448 20,-6.19214"
+                    />
+                    <path
+                            style="fill:#e9afaf;stroke:none"
+                            d="m 117.16737,265.78178 c -12.29187,-8.66437 -19.836701,-24.38525 -25.396611,-38 -12.03805,-29.47809 -17.60339,-59.20612 -17.60339,-91 0,-12.93604 0.89212,-42.546331 17.00385,-46.581051 9.842071,-2.46467 20.509551,4.7572 27.996151,10.221491 19.28555,14.07611 34.30518,32.72724 46.14969,53.35956 3.81665,6.64832 14.40015,22.04254 10.78317,30 -4.91418,10.8114 -19.23236,19.64252 -26.73303,29 -13.32657,16.62561 -21.599,34.83423 -32.19983,53"
+                    />
+                    <path
+                            style="fill:#e9afaf;stroke:none"
+                            d="m 548.16737,266.78178 c -7.17657,-21.21313 -19.09344,-41.52679 -33.00385,-59 -6.07763,-7.63428 -20.86602,-17.92047 -23.58953,-27 -2.219,-7.39758 9.10022,-22.12158 12.9375,-28 13.80859,-21.15381 31.62786,-42.18878 53.65588,-55.138921 7.55786,-4.44323 18.96368,-11.21557 27.99615,-7.20446 14.26819,6.33618 13.30396,32.494011 12.9892,45.343381 -0.83697,34.16766 -10.93542,68.61957 -26.23303,99 -5.47907,10.88123 -13.28113,26.6499 -24.75232,32"
+                    />
+                    <path
+                            style="fill:#fa914c;fill-opacity:1;stroke:none"
+                            d="m 317.16737,140.78178 c -4.5928,34.1062 -11.53299,67.4762 -13.91049,102 -2.45435,35.63965 -2.22568,75.93158 -22.43442,107 -14.64984,22.52228 -40.76193,49.16864 -68.65509,53.56097 -24.66724,3.88434 -48.86661,-6.18072 -72,7.90278 -11.35172,6.91088 -20.83871,17.93933 -25.30093,30.53625 -1.67582,4.73083 -1.09739,11.27917 -3.30167,15.56635 -1.56458,3.04296 -7.38239,2.92486 -10.21222,2.11578 -7.881221,-2.25354 -13.115631,-19.52979 -11.497681,-26.68213 0.87393,-3.8634 5.74335,-8.9425 3.57562,-12.82947 -5.80169,-10.40307 -19.80627,-14.47314 -23.61419,-27.17053 -3.24926,-10.83453 7.77581,-14.40436 14.35107,-20.18445 7.64307,-6.71875 12.90677,-14.68091 17.219151,-23.81555 9.25973,-19.61432 11.16436,-42.17523 16.66513,-63 4.41736,-16.72321 12.42178,-33.35217 21.54086,-48 8.44104,-13.55872 18.31455,-26.65442 29.57871,-37.99921 4.13656,-4.1662 14.60964,-9.92144 15.50463,-16.01544 1.19977,-8.169 -6.16998,-20.01288 -9.76696,-26.98535 -12.89414,-24.99426 -31.25766,-48.58276 -54.74152,-64.329471 -15.78461,-10.5841 -34.973541,-16.30426 -45.391201,4.32947 -7.0019,13.868291 -7.6088,29.806031 -7.6088,45.000001 0,33.36951 6.98386,67.02942 21.96915,97 4.16275,8.3255 9.01831,16.72473 14.838711,24 2.79804,3.49738 8.34796,7.47028 9.26312,12 1.96048,9.70374 -6.6224,24.58038 -7.07098,35 -17.577361,-8.14856 -30.602231,-30.97101 -40.199841,-47 -29.17644,-48.72766 -43.13329,-108.4187 -35.071,-165.000001 3.52374,-24.72968 10.4198,-67.132446 40.27084,-72.904297 16.33929,-3.159302 32.187101,4.705322 46.000001,12.624207 34.21176,19.61353 63.42892,53.86102 87.80017,84.280091 5.98679,7.47241 11.74118,15.1134 17.17438,23 2.37289,3.4444 4.60565,8.89197 8.23532,11.16437 5.27527,3.30261 18.13052,-4.07758 23.79013,-5.53473 20.25989,-5.21625 42.0246,-9.62726 63,-9.62964"
+                    />
+                    <path
+                            style="fill:#552200;stroke:none"
+                            d="m 223.16737,308.24937 c -38.00375,7.18195 -30.47116,80.48358 10,72.91357 38.19183,-7.14367 31.66357,-80.78717 -10,-72.91357"
+                    />
+                    <path
+                            style="fill:#ffffff;stroke:none"
+                            d="m 228.31311,336.73278 c 10.09216,-1.94611 12.34387,16.92108 2.94135,19.03009 -10.73648,2.4082 -13.00238,-17.08997 -2.94135,-19.03009"
+                            id="eyeball-left"
+                    />
+                    <path
+                            style="fill:#fa914c;fill-opacity:1;stroke:none"
+                            d="m 559.16737,309.78178 c -1.73499,-8.94635 -9.04004,-25.34607 -7.09644,-34 1.91968,-8.54742 15.72016,-19.047 20.67127,-27 12.29321,-19.74658 21.26733,-42.33746 26.41437,-65 5.20306,-22.90918 8.63037,-46.55688 5.96063,-70 -1.17218,-10.29279 -4.62946,-23.155641 -13.95368,-29.005371 -13.01702,-8.16651 -30.23748,2.00879 -40.99615,9.59564 -27.42065,19.336671 -55.53741,51.049321 -66.36188,83.409731 -2.57519,7.69873 6.6283,12.37543 11.36109,17.01465 12.25287,12.01062 22.20837,26.33105 31.00079,40.98535 10.23248,17.05438 18.21307,35.53564 22.57483,55 4.37506,19.52362 5.62787,40.8653 14.69525,59 4.26984,8.53961 10.15961,16.45026 17.72992,22.32019 5.28992,4.10175 14.34485,7.86939 14.60107,15.67981 0.49799,15.18066 -18.45398,21.47882 -24.93902,32.17053 -2.62049,4.32038 3.58868,10.11884 3.94671,14.82947 0.50843,6.68976 -4.99365,21.84296 -11.79321,24.3573 -3.08899,1.14221 -7.55035,-0.28992 -10.81555,-0.3573 -0.0201,-30.34235 -25.70953,-52.99579 -55,-55.83026 -15.19971,-1.47089 -31.16443,3.16669 -46,-0.64813 -22.41473,-5.76374 -43.41205,-24.82038 -57.33099,-42.52161 -21.40631,-27.22321 -24.47998,-60.76019 -26.75849,-94 -2.87079,-41.88013 -4.81103,-84.31903 -15.91052,-125 20.31281,0.056 41.54065,4.7041 61,10.29089 5.82916,1.67353 18.41968,8.65625 23.90973,5.09027 10.61597,-6.89538 18.81183,-23.78369 27.24536,-33.38116 26.78082,-30.476751 55.94586,-59.725161 89.84491,-82.333314 15.58112,-10.391479 33.46802,-20.602661 53,-17.341064 32.27679,5.389831 34.14685,47.712467 37.42438,72.674377 1.96234,14.945071 -0.66199,31.087831 -2.25849,46.000001 -4.64013,43.34125 -17.13488,87.1496 -40.85803,124 -9.95215,15.45917 -23.78583,36.58301 -41.30786,44"
+                    />
+                    <path
+                            style="fill:#552200;stroke:none"
+                            d="m 437.16737,307.49321 c -39.89758,0.53106 -39.49432,74.20983 0,74.20983 39.9884,0 40.60052,-74.75024 0,-74.20983"
+                    />
+                    <path
+                            style="fill:#ffffff;stroke:none"
+                            d="m 436.08027,336.42389 c 10.89435,-3.10956 13.86847,15.76703 3.94135,18.14819 -10.69007,2.56415 -13.64105,-15.37958 -3.94135,-18.14819"
+                            id="eyeball-right"
+                    />
+                </svg>
 
-    <footer>
-      <div class="container grid">
+                <!-- WHY US -->
+
+                <div class="why-us-grid">
+                    <article class="why-us-card">
+                        <img
+                                src="./assets/gifs/calendar.gif"
+                                alt="Kalendarz"
+                                loading="lazy"
+                        />
+                        <div class="heading2B">Wygodna rezerwacja</div>
+                        <div class="body text-neutral">
+                            Rezerwuj, zmień termin wizyty lub odwołaj w razie potrzeby -
+                            wszystko wykonasz wygodnie w aplikacji
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img src="./assets/gifs/report.gif" alt="Raport" loading="lazy"/>
+                        <div class="heading2B">Historia leczenia</div>
+                        <div class="body text-neutral">
+                            Wszystkie dane medyczne Twojego pupila w jednym miejscu
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img
+                                src="./assets/gifs/payment.gif"
+                                alt="Platnosc online"
+                                loading="lazy"
+                        />
+                        <div class="heading2B">Płatności online</div>
+                        <div class="body text-neutral">
+                            Za wizytę zapłacisz szybko, bezpiecznie i wygodnie
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img
+                                src="./assets/gifs/notification.gif"
+                                alt="Powiadomienia"
+                                loading="lazy"
+                        />
+                        <div class="heading2B">Przypomnienia</div>
+                        <div class="body text-neutral">
+                            Nie przegapisz już żadnej wizyty ani szczepienia - aplikacja
+                            przypomni Ci o wszystkich ważnych sprawach związanych z
+                            pupilem
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img src="./assets/gifs/rating.gif" alt="Oceny" loading="lazy"/>
+                        <div class="heading2B">System ocen</div>
+                        <div class="body text-neutral">
+                            Sprawdź opinie o weterynarzu i oceń swoje wizyty - łatwiej
+                            wybierzesz najlepszego specjalistę dla swojego pupila
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img
+                                src="./assets/gifs/24h.gif"
+                                alt="Calkodobowa pomoc"
+                                loading="lazy"
+                        />
+                        <div class="heading2B">Dyżury nocne</div>
+                        <div class="body text-neutral">
+                            W nagłej sytuacji aplikacja pomoże Ci znaleźć pomoc, nawet w
+                            godzinach nocnych
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img
+                                src="./assets/gifs/message.gif"
+                                alt="Wiadomosci"
+                                loading="lazy"
+                        />
+                        <div class="heading2B">Kontakt z lekarzem</div>
+                        <div class="body text-neutral">
+                            W razie potrzeby po wizycie możesz zadać dodatkowe pytania
+                            lekarzowi
+                        </div>
+                    </article>
+
+                    <article class="why-us-card">
+                        <img
+                                src="./assets/gifs/prescription.gif"
+                                alt="Recepta"
+                                loading="lazy"
+                        />
+                        <div class="heading2B">E-recepty</div>
+                        <div class="body text-neutral">
+                            Otrzymuj recepty bez wychodzenia z domu - kilka kliknięć, a
+                            leki możesz odebrać w wybranej aptece
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DLA KOGO -->
+    <section class="section" id="dlakogo">
+        <div class="container">
+            <div class="reveal" style="text-align: center; margin-bottom: 24px">
+                <h2>Dla kogo jest Zoovi?</h2>
+                <p>
+                    Tworzymy doświadczenie wygodne dla właścicieli i przyjazne dla
+                    zwierzaków — a specjalistom dajemy nowe możliwości.
+                </p>
+            </div>
+            <div class="split">
+                <div class="panel reveal">
+                    <h3>Właściciele pupili</h3>
+                    <ul>
+                        <li>Wszystko w jednej aplikacji</li>
+                        <li>Szybka rezerwacja i płatność</li>
+                        <li>Historia leczenia w jednym miejscu</li>
+                        <li>Rekomendacje dopasowane do potrzeb</li>
+                    </ul>
+                    <div class="cta-row" style="margin-top: 12px">
+                        <a class="btn primary" href="#pobierz">Pobierz aplikację</a>
+                    </div>
+                </div>
+                <div class="panel reveal" id="specjalisci">
+                    <h3>Specjaliści</h3>
+                    <ul>
+                        <li>Porządkowanie wizyt</li>
+                        <li>Kalendarz online i automatyczne przypomnienia</li>
+                        <li>Nowi klienci w Twojej okolicy</li>
+                        <li>Informacje o zwierzęciu</li>
+                    </ul>
+                    <div class="cta-row" style="margin-top: 12px">
+                        <a class="btn secondary"
+                        >Dołącz jako specjalista</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+        <div class="container faq">
+            <div class="reveal" style="text-align: center; margin-bottom: 24px">
+                <h2>Najczęstsze pytania</h2>
+            </div>
+            <details class="reveal">
+                <summary>Jak działają rezerwacje i płatności?</summary>
+                <p>
+                    Wybierasz usługę i termin, a następnie potwierdzasz rezerwację.
+                    Płatność możesz wykonać online lub na miejscu — zależnie od
+                    specjalisty.
+                </p>
+            </details>
+            <details class="reveal">
+                <summary>Czy specjaliści są weryfikowani?</summary>
+                <p>
+                    Tak. Współpracujemy z zweryfikowanymi specjalistami, bazując na
+                    dokumentach i ocenach użytkowników.
+                </p>
+            </details>
+            <details class="reveal">
+                <summary>Czy mogę odwołać lub zmienić termin?</summary>
+                <p>
+                    Oczywiście. W aplikacji znajdziesz przejrzystą politykę odwołań
+                    oraz możliwość szybkiej zmiany terminu.
+                </p>
+            </details>
+            <details class="reveal">
+                <summary>Na jakich urządzeniach działa Zoovi?</summary>
+                <p>
+                    Na telefonach i tabletach z iOS i Androidem, a wkrótce także w
+                    wersji webowej.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" id="pobierz">
+        <div class="container">
+            <div class="cta-final reveal surface">
+                <div style="display: grid; gap: 10px; align-items: center">
+                    <h2 style="color: white; margin: 0">
+                        Gotowy, by ułatwić sobie opiekę nad pupilem?
+                    </h2>
+                    <p style="color: #e2f7f3; margin: 0 0 8px">
+                        Dołącz do Zoovi i rezerwuj usługi w kilka kliknięć.
+                    </p>
+                    <div class="cta-row">
+                        <a
+                                class="btn"
+                                style="background: white; color: #0f172a"
+                                href="#"
+                                aria-label="Pobierz w sklepie z aplikacjami"
+                        >
+                            <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                            >
+                                <path
+                                        d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                                />
+                            </svg>
+                            Pobierz aplikację
+                        </a>
+                        <a
+                                class="btn"
+                                style="background: #0f172a; color: white"
+                                href="#jak"
+                        >
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 48 48"
+                                    fill="#FFFFFF"
+                            >
+                                <g>
+                                    <path
+                                            fill-rule="evenodd"
+                                            d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
+                                            clip-rule="evenodd"
+                                    ></path>
+                                    <path
+                                            d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
+                                    ></path>
+                                    <path
+                                            d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
+                                    ></path>
+                                </g>
+                            </svg>
+                            Zostań partnerem
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container grid">
         <div>
-          <div class="brand" style="margin-bottom: 0.5rem">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <defs>
-                <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#13A38B" />
-                  <stop offset="1" stop-color="#0E7F6B" />
-                </linearGradient>
-              </defs>
-              <circle cx="32" cy="32" r="30" fill="url(#g2)" opacity=".25" />
-              <path
-                d="M40.5 37c5 0 9-4.5 9-10s-3-9-7.5-9c-2.8 0-4 .8-6.5 3.3-2.7-2.5-3.7-3.3-6.5-3.3C24 18 21 21.5 21 27s4 10 9 10"
-                fill="none"
-                stroke="#13A38B"
-                stroke-width="2.8"
-                stroke-linecap="round"
-              />
-              <circle cx="39.5" cy="33" r="3" fill="#F4C14E" />
-              <path
-                d="M30 41c-2 3-5 5-9 6"
-                stroke="#0E7F6B"
-                stroke-width="2.4"
-                fill="none"
-                stroke-linecap="round"
-              />
-            </svg>
-            <strong>Zoovi</strong>
-          </div>
-          <p>
-            Intuicyjna platforma do rezerwacji usług weterynaryjnych,
-            pielęgnacyjnych i opiekuńczych.
-          </p>
+            <div class="brand" style="margin-bottom: 0.5rem">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+                            <stop offset="0" stop-color="#13A38B"/>
+                            <stop offset="1" stop-color="#0E7F6B"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="32" cy="32" r="30" fill="url(#g2)" opacity=".25"/>
+                    <path
+                            d="M40.5 37c5 0 9-4.5 9-10s-3-9-7.5-9c-2.8 0-4 .8-6.5 3.3-2.7-2.5-3.7-3.3-6.5-3.3C24 18 21 21.5 21 27s4 10 9 10"
+                            fill="none"
+                            stroke="#13A38B"
+                            stroke-width="2.8"
+                            stroke-linecap="round"
+                    />
+                    <circle cx="39.5" cy="33" r="3" fill="#F4C14E"/>
+                    <path
+                            d="M30 41c-2 3-5 5-9 6"
+                            stroke="#0E7F6B"
+                            stroke-width="2.4"
+                            fill="none"
+                            stroke-linecap="round"
+                    />
+                </svg>
+                <strong>Zoovi</strong>
+            </div>
+            <p>
+                Intuicyjna platforma do rezerwacji usług weterynaryjnych,
+                pielęgnacyjnych i opiekuńczych.
+            </p>
         </div>
         <div>
-          <h3>Firma</h3>
-          <ul
-            style="
+            <h3>Firma</h3>
+            <ul
+                    style="
               list-style: none;
               padding: 0;
               margin: 8px 0 0;
               display: grid;
               gap: 0.35rem;
             "
-          >
-            <li><a href="#start">O nas</a></li>
-            <li><a href="#kariera">Kariera</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-          </ul>
+            >
+                <li><a>O nas</a></li>
+                <li><a>Kariera</a></li>
+                <li><a>Kontakt</a></li>
+            </ul>
         </div>
         <div>
-          <h3>Produkt</h3>
-          <ul
-            style="
+            <h3>Produkt</h3>
+            <ul
+                    style="
               list-style: none;
               padding: 0;
               margin: 8px 0 0;
               display: grid;
               gap: 0.35rem;
             "
-          >
-            <li><a href="#jak">Jak działa</a></li>
-            <li><a href="#uslugi">Usługi</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
+            >
+                <li><a href="#jak">Jak działa</a></li>
+                <li><a href="#uslugi">Usługi</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
         </div>
         <div>
-          <h3>Legal</h3>
-          <ul
-            style="
+            <h3>Legal</h3>
+            <ul
+                    style="
               list-style: none;
               padding: 0;
               margin: 8px 0 0;
               display: grid;
               gap: 0.35rem;
             "
-          >
-            <li><a href="#regulamin">Regulamin</a></li>
-            <li><a href="#prywatnosc">Prywatność</a></li>
-            <li><a href="#cookies">Cookies</a></li>
-          </ul>
+            >
+                <li><a>Regulamin</a></li>
+                <li><a>Prywatność</a></li>
+                <li><a>Cookies</a></li>
+            </ul>
         </div>
-      </div>
-      <div
-        class="container"
-        style="
+    </div>
+    <div
+            class="container"
+            style="
           margin-top: 18px;
           display: flex;
           justify-content: space-between;
           gap: 12px;
           flex-wrap: wrap;
         "
-      >
+    >
         <small
-          >© <span id="year"></span> Zoovi. Wszelkie prawa zastrzeżone.</small
+        >© <span id="year"></span> Zoovi. Wszelkie prawa zastrzeżone.</small
         >
-      </div>
-    </footer>
+    </div>
+</footer>
 
-    <script>
-      console.log("INIT");
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+<script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
         a.addEventListener("click", (e) => {
-          const href = a.getAttribute("href");
-          if (href.length > 1) {
-            const el = document.querySelector(href);
-            if (el) {
-              e.preventDefault();
-              el.scrollIntoView({ behavior: "smooth", block: "start" });
-              // Close mobile menu if open
-              mobileMenu.classList.remove("open");
-              burger.setAttribute("aria-expanded", "false");
+            const href = a.getAttribute("href");
+            if (href.length > 1) {
+                const el = document.querySelector(href);
+                if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({behavior: "smooth", block: "start"});
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove("open");
+                    burger.setAttribute("aria-expanded", "false");
+                }
             }
-          }
         });
-      });
+    });
 
-      // Mobile menu toggle
-      const burger = document.querySelector(".burger");
-      const mobileMenu = document.getElementById("mobileMenu");
-      burger.addEventListener("click", () => {
+    // Mobile menu toggle
+    const burger = document.querySelector(".burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
         const open = mobileMenu.classList.toggle("open");
         burger.setAttribute("aria-expanded", open ? "true" : "false");
-      });
+    });
 
-      // Intersection Observer reveal
-      const prefersReduced = window.matchMedia(
+    // Intersection Observer reveal
+    const prefersReduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
-      ).matches;
-      const revealEls = document.querySelectorAll(".reveal");
-      if ("IntersectionObserver" in window && !prefersReduced) {
+    ).matches;
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && !prefersReduced) {
         const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15 }
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            {threshold: 0.15}
         );
         revealEls.forEach((el) => io.observe(el));
-      } else {
+    } else {
         revealEls.forEach((el) => el.classList.add("visible"));
-      }
+    }
 
-      // Simple testimonial slider
-      const slides = document.getElementById("slides");
-      const prev = document.querySelector(".prev");
-      const next = document.querySelector(".next");
-      const step = () => slides.clientWidth * 0.9;
-      next.addEventListener("click", () => {
-        slides.scrollBy({ left: step(), behavior: "smooth" });
-      });
-      prev.addEventListener("click", () => {
-        slides.scrollBy({ left: -step(), behavior: "smooth" });
-      });
-
-      // Auto-advance slider every 6s (pause on hover)
-      let auto = setInterval(() => next.click(), 6000);
-      slides.addEventListener("mouseenter", () => clearInterval(auto));
-      slides.addEventListener(
-        "mouseleave",
-        () => (auto = setInterval(() => next.click(), 6000))
-      );
-
-      // Current year in footer
-      document.getElementById("year").textContent = new Date().getFullYear();
+    // Current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear().toString();
 
 
-      // ### Interactive Corgi Section ###
+    // ### Interactive Corgi Section ###
 
-      // Get the eyeball elements by ID
-      const leftEyeball = document.getElementById("path9"); // Eyeball - Left
-      const rightEyeball = document.getElementById("path10"); // Eyeball - Right
+    const leftEyeCenter = {x: 238, y: 324}
+    const rightEyeCenter = {x: 426, y: 324}
+    const maxRadius = 15
 
-      // Approximate centers of the eyes (based on your SVG paths; adjust if needed)
-      const leftEyeCenter = { x: 238, y: 323 }; // Center of left eye
-      const rightEyeCenter = { x: 426, y: 324 }; // Center of right eye
+    const svgRef = document.getElementById('corgi-svg')
+    const leftEyeball = document.getElementById('eyeball-left')
+    const rightEyeball = document.getElementById('eyeball-right')
 
-      // Max movement radius for eyeballs (in pixels)
-      const maxRadius = 15;
 
-      // Function to move an eyeball toward the cursor
-      function moveEyeball(eyeball, eyeCenter, mouseX, mouseY) {
-        // Get SVG's position on the page
-        const svg = document.querySelector("svg");
-        const svgRect = svg.getBoundingClientRect();
+    let pendingEvt = null
+    let rafId = 0
 
-        // Convert mouse coords to SVG coords
-        const svgMouseX = mouseX - svgRect.left;
-        const svgMouseY = mouseY - svgRect.top;
+    function getSVGPointFromClientCoordinates(clientX, clientY) {
+        const svg = svgRef
+        if (!svg) return null
+        const ctm = svg.getScreenCTM()
+        if (!ctm) return null
+        const inv = ctm.inverse()
+        const pt = new DOMPoint(clientX, clientY).matrixTransform(inv)
+        return {x: pt.x, y: pt.y}
+    }
 
-        // Calculate direction vector from eye center to mouse
-        const dx = svgMouseX - eyeCenter.x;
-        const dy = svgMouseY - eyeCenter.y;
+    function moveEyeball(eyeballElement, eyeCenter, svgCoordinatesPoint) {
+        if (!eyeballElement || !svgCoordinatesPoint) return
+        const dx = svgCoordinatesPoint.x - eyeCenter.x
+        const dy = svgCoordinatesPoint.y - eyeCenter.y
+        const distance = Math.hypot(dx, dy)
+        const angle = Math.atan2(dy, dx)
+        const move = Math.min(distance, maxRadius)
+        eyeballElement.setAttribute('transform', `translate(${Math.cos(angle) * move}, ${Math.sin(angle) * move})`)
+    }
 
-        // Calculate distance and normalize
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx);
+    function onPointerMove(evt) {
+        pendingEvt = evt
+        if (!rafId) rafId = requestAnimationFrame(flush)
+    }
 
-        // Limit movement to maxRadius
-        const moveDistance = Math.min(distance, maxRadius);
-        const offsetX = Math.cos(angle) * moveDistance;
-        const offsetY = Math.sin(angle) * moveDistance;
+    function flush() {
+        if (!pendingEvt) {
+            rafId = 0;
+            return
+        }
+        const {clientX, clientY} = pendingEvt
+        pendingEvt = null
 
-        // Apply transform
-        eyeball.setAttribute("transform", `translate(${offsetX}, ${offsetY})`);
-      }
+        const p = getSVGPointFromClientCoordinates(clientX, clientY)
+        moveEyeball(leftEyeball, leftEyeCenter, p)
+        moveEyeball(rightEyeball, rightEyeCenter, p)
 
-      // Listen for mouse movement
-      document.addEventListener("mousemove", (event) => {
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
+        rafId = 0
+    }
 
-        if (leftEyeball)
-          moveEyeball(leftEyeball, leftEyeCenter, mouseX, mouseY);
-        if (rightEyeball)
-          moveEyeball(rightEyeball, rightEyeCenter, mouseX, mouseY);
-      });
-    </script>
-  </body>
+    window.addEventListener('pointermove', onPointerMove, {passive: true})
+    window.addEventListener('mousemove', onPointerMove, {passive: true})
+    window.addEventListener('scroll', onPointerMove, {passive: true})
+
+</script>
+</body>
 </html>
 
 
