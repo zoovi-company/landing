@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Zoovi — Rezerwuj usługi dla pupila w jednym miejscu</title>
     <meta
             name="description"
             content="Zoovi to intuicyjna aplikacja do szybkiego rezerwowania wizyt u weterynarza, groomera i opiekuna. Zweryfikowani specjaliści, przejrzyste ceny i przypomnienia."
     />
-    <link rel="preload" href="./assets/fonts/Baloo2.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="./assets/fonts/Inter.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="./assets/fonts/Inter-Italic.ttf" as="font" type="font/ttf" crossorigin>
+    <link
+            rel="preload"
+            href="./assets/fonts/Baloo2.ttf"
+            as="font"
+            type="font/ttf"
+            crossorigin
+    />
+    <link
+            rel="preload"
+            href="./assets/fonts/Inter.ttf"
+            as="font"
+            type="font/ttf"
+            crossorigin
+    />
+    <link
+            rel="preload"
+            href="./assets/fonts/Inter-Italic.ttf"
+            as="font"
+            type="font/ttf"
+            crossorigin
+    />
 
     <style>
         @font-face {
@@ -89,8 +107,8 @@
         h1,
         h2,
         h3 {
-            font-family: 'Baloo 2', Inter, system-ui, -apple-system, Segoe UI, Roboto,
-            Helvetica, Arial, sans-serif;
+            font-family: "Baloo 2", Inter, system-ui, -apple-system, Segoe UI,
+            Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.15;
             margin: 0 0 0.5rem;
             color: #0f172a;
@@ -131,6 +149,12 @@
             max-width: var(--container);
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 16px;
+            }
         }
 
         .btn {
@@ -289,6 +313,14 @@
                 display: none;
             }
 
+            .nav-cta {
+                gap: 0.5rem;
+            }
+
+            .nav-cta .btn {
+                display: none;
+            }
+
             .burger {
                 display: inline-flex;
             }
@@ -312,16 +344,34 @@
                 pointer-events: auto;
             }
 
+            .mobile-menu-content {
+                padding: 18px 20px 24px;
+                display: grid;
+                gap: 16px;
+            }
+
+            .mobile-menu-cta {
+                display: grid;
+                gap: 12px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .mobile-menu-cta .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
             .mobile-menu ul {
                 list-style: none;
-                padding: 14px 20px 24px;
+                padding: 0;
                 margin: 0;
                 display: grid;
-                gap: 0.25rem;
+                gap: 0.35rem;
             }
 
             .mobile-menu a {
-                display: block;
+                display: flex;
                 padding: 12px 10px;
                 font-weight: 600;
                 color: #0f172a;
@@ -339,7 +389,7 @@
             align-items: center;
             grid-template-columns: 1.05fr 0.95fr;
             gap: clamp(24px, 4vw, 56px);
-            padding: clamp(36px, 5vw, 72px) 0 0;
+            padding: clamp(36px, 5vw, 72px) 20px;
         }
 
         .hero .kicker {
@@ -351,9 +401,13 @@
             max-width: 55ch;
         }
 
+        .hero .reveal {
+            width: 100%;
+        }
+
         .cta-row {
             display: flex;
-            justify-content: end;
+            justify-content: flex-start;
             flex-wrap: wrap;
             gap: 0.75rem;
             margin-top: 1rem;
@@ -433,7 +487,7 @@
         .ui {
             position: absolute;
             inset: 26px 0 0 0;
-            padding: 16px 16px 0;
+            padding: 16px;
             display: grid;
             gap: 12px;
             font-size: 0.95rem;
@@ -448,6 +502,8 @@
             padding: 0.15rem 0.75rem;
             border-radius: 14px;
             line-height: 0;
+            text-wrap-mode: nowrap;
+            overflow-x: hidden;
         }
 
         .ui .pill {
@@ -462,7 +518,7 @@
             align-items: center;
             background: #f1f5f9;
             color: #334155;
-            padding: 0.1rem 0.6rem;
+            padding: 5px;
             border-radius: 12px;
             font-size: 0.8rem;
             font-weight: 600;
@@ -518,6 +574,68 @@
 
             .device {
                 max-width: 320px;
+            }
+
+            .ui .pill span {
+                line-height: normal;
+            }
+
+            .ui .search {
+                line-height: normal;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                text-align: center;
+                justify-items: center;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-row {
+                justify-content: center;
+            }
+
+            .trust {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 16px;
+                margin: 30px 0;
+            }
+
+            .cta-row {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta-row .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .trust {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .mobile-menu-content {
+                padding: 16px;
+                gap: 14px;
+            }
+
+            .slider-controls {
+                justify-content: center;
             }
         }
 
@@ -721,7 +839,7 @@
         }
 
         .card-service {
-            padding: 22px;
+            padding: clamp(18px, 3.5vw, 22px);
             border-radius: var(--radius);
             border: 1px solid var(--line);
             background: linear-gradient(160deg, #fff, #f8fffe);
@@ -764,7 +882,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
 
         .usp .icon {
             width: 40px;
@@ -847,7 +964,7 @@
         }
 
         .panel {
-            padding: 24px;
+            padding: clamp(20px, 4vw, 24px);
             border: 1px solid var(--line);
             background: linear-gradient(180deg, #fff, #fafefd);
             border-radius: var(--radius);
@@ -995,6 +1112,14 @@
             gap: 18px;
         }
 
+        .footer-bottom {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
         footer a {
             color: #334155;
         }
@@ -1012,6 +1137,14 @@
         @media (max-width: 560px) {
             footer .grid {
                 grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 8px;
             }
         }
 
@@ -1059,13 +1192,13 @@
 <header>
     <div class="container nav" role="navigation" aria-label="Główne">
         <div class="brand">
-            <img src="./assets/images/logo2.svg">
+            <img src="./assets/images/logo2.svg" />
             <span>Zoovi</span>
         </div>
 
         <nav aria-label="Menu">
             <ul>
-                <li><a href="#jak">Jak działa</a></li>
+                <li><a href="#jak">Jak to działa</a></li>
                 <li><a href="#uslugi">Usługi</a></li>
                 <li><a href="#dlakogo">Dla kogo</a></li>
                 <li><a href="#opinie">Opinie</a></li>
@@ -1074,7 +1207,30 @@
         </nav>
 
         <div class="nav-cta">
-            <a class="btn link" href="#specjalisci">Dla specjalistów</a>
+            <a class="btn link" href="#specjalisci">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 48 48"
+                        fill="#FFFFFF"
+                >
+                    <g>
+                        <path
+                                fill-rule="evenodd"
+                                d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
+                                clip-rule="evenodd"
+                        ></path>
+                        <path
+                                d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
+                        ></path>
+                        <path
+                                d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
+                        ></path>
+                    </g>
+                </svg>
+                Dla specjalistów
+            </a>
             <a
                     class="btn primary"
                     href="#pobierz"
@@ -1105,7 +1261,7 @@
                         stroke="currentColor"
                         stroke-width="2"
                 >
-                    <path d="M3 6h18M3 12h18M3 18h18"/>
+                    <path d="M3 6h18M3 12h18M3 18h18" />
                 </svg>
             </button>
         </div>
@@ -1117,15 +1273,59 @@
             role="dialog"
             aria-label="Menu mobilne"
     >
-        <ul class="container">
-            <li><a href="#jak">Jak działa</a></li>
-            <li><a href="#uslugi">Usługi</a></li>
-            <li><a href="#dlakogo">Dla kogo</a></li>
-            <li><a href="#opinie">Opinie</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#pobierz">Pobierz aplikację</a></li>
-            <li><a href="#specjalisci">Dla specjalistów</a></li>
-        </ul>
+        <div class="mobile-menu-content container">
+            <div class="mobile-menu-cta" role="group" aria-label="Szybkie akcje">
+                <a
+                        class="btn primary"
+                        href="#pobierz"
+                        aria-label="Pobierz aplikację Zoovi"
+                >
+                    <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                    >
+                        <path
+                                d="M7 2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4a2 2 0 012-2zm5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                        />
+                    </svg>
+                    Pobierz aplikację
+                </a>
+                <a class="btn secondary" href="#specjalisci">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 48 48"
+                            fill="#FFFFFF"
+                    >
+                        <g>
+                            <path
+                                    fill-rule="evenodd"
+                                    d="M17.914 23.759C15.952 23.238 12 21.777 12 18.463C12 14.056 17.378 8 17.378 8s1.751-3 6.677-3c4.925 0 7.442 3 7.442 3S35 11.927 35 18.463c0 3.368-1.976 4.735-3.891 5.27c-1.556 1.85-3.955 3.023-6.609 3.023c-2.642 0-5.03-1.161-6.587-2.997m.581-2.842c.924 2.224 3.232 3.84 6.005 3.84c1.14 0 2.201-.274 3.12-.75L27.557 24s5.978-5.768.943-13c-.547-1.017-8.878 1.5-10 3c-.674.9-.362 4.325-.005 6.917"
+                                    clip-rule="evenodd"
+                            ></path>
+                            <path
+                                    d="M14.433 33.442a3 3 0 1 0 1.96-.416a9 9 0 0 1-.103-.405a20 20 0 0 1-.32-1.87a17 17 0 0 1-.14-1.914a7 7 0 0 1 .015-.527q.577-.166 1.155-.297c.441-.1.703.42.914.842l.011.022l.075.147h11.749c.229-.434.748-1.126 1.251-1.011q.806.183 1.609.433l-.003.001q-.003-.003 0 .002c.004.014.026.08.048.22q.038.244.05.625c.014.504-.015 1.117-.074 1.735c-.06.617-.149 1.214-.249 1.685q-.033.157-.066.286H31a1 1 0 0 0-.894.553l-1 2A1 1 0 0 0 29 36v2a1 1 0 0 0 1 1h2v-2h-1v-.764L31.618 35h2.764L35 36.236V37h-1v2h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-.106-.447l-1-2A1 1 0 0 0 35 33h-.636c.107-.533.196-1.155.256-1.779c.066-.674.1-1.373.083-1.983l-.001-.028C38.69 30.895 42 33.666 42 36.57V42H6v-5.43c0-3.032 3.61-5.92 7.831-7.577c.011.622.07 1.325.155 2.006c.092.735.217 1.466.355 2.068q.045.193.092.375"
+                            ></path>
+                            <path
+                                    d="M16 37.015c.538 0 1-.44 1-1.015c0-.574-.462-1.015-1-1.015s-1 .44-1 1.015c0 .574.462 1.015 1 1.015"
+                            ></path>
+                        </g>
+                    </svg>
+                    Dla specjalistów
+                </a>
+            </div>
+            <ul>
+                <li><a href="#jak">Jak to działa</a></li>
+                <li><a href="#uslugi">Usługi</a></li>
+                <li><a href="#dlakogo">Dla kogo</a></li>
+                <li><a href="#opinie">Opinie</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
     </div>
 </header>
 
@@ -1135,9 +1335,9 @@
         <div class="reveal">
             <h1>Wszystkie usługi dla Twojego pupila — w jednym miejscu.</h1>
             <p>
-                Rezerwuj weterynarza, groomera i opiekuna w kilka sekund.
-                Intuicyjna aplikacja zaprojektowana dla wygody właścicieli i
-                komfortu zwierzaków.
+                Rezerwuj weterynarza, groomera i opiekuna w kilka sekund. Intuicyjna
+                aplikacja zaprojektowana dla wygody właścicieli i komfortu
+                zwierzaków.
             </p>
             <div class="cta-row">
                 <a class="btn primary" href="#pobierz">
@@ -1190,8 +1390,8 @@
                                     stroke="#64748B"
                                     stroke-width="2"
                             >
-                                <circle cx="11" cy="11" r="7"/>
-                                <path d="M21 21l-4.3-4.3"/>
+                                <circle cx="11" cy="11" r="7" />
+                                <path d="M21 21l-4.3-4.3" />
                             </svg>
                             Szukaj usługi lub specjalisty...
                         </div>
@@ -1309,8 +1509,8 @@
                                             stroke="currentColor"
                                             stroke-width="2"
                                     >
-                                        <circle cx="11" cy="11" r="7"/>
-                                        <path d="M21 21l-4.3-4.3"/>
+                                        <circle cx="11" cy="11" r="7" />
+                                        <path d="M21 21l-4.3-4.3" />
                                     </svg>
                                 </div>
                                 <h3>1. Znajdź usługę</h3>
@@ -1508,60 +1708,84 @@
                         xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
-                            style="display:inline;fill:#552200;stroke:none;stroke-width:1.00157;stroke-dasharray:none"
+                            style="
+                  display: inline;
+                  fill: #552200;
+                  stroke: none;
+                  stroke-width: 1.00157;
+                  stroke-dasharray: none;
+                "
                             d="m 598.17518,14.668498 c -12.93373,0.400623 -25.58661,6.059433 -37.00781,11.86914 -36.57526,18.604981 -69.00763,51.741641 -95.71484,82.244142 -7.96759,9.09979 -15.59283,18.49811 -23.07422,28 -2.67682,3.39978 -6.07355,10.15198 -10.38086,11.59375 -3.80969,1.27521 -10.112,-2.42341 -13.83008,-3.44141 -11.82092,-3.23657 -23.91296,-6.03521 -36,-8.07226 -33.57159,-5.65795 -67.47122,-5.11908 -101,0.50586 -11.48688,1.92712 -22.80298,4.34424 -34,7.55468 -3.90091,1.11846 -9.95161,4.58014 -13.81641,2.16211 C 222.96723,140.58793 213.87718,121.55357 206.2826,111.78178 181.8281,80.316749 150.16984,44.848909 114.16737,26.537638 99.203589,18.92692 80.873759,11.884868 64.167369,18.248576 c -30.07431,11.45575 -38.13511,52.222903 -41.16602,80.533203 -6.44005,60.153261 6.69487,120.643251 39.21875,172.000001 9.85353,15.5592 24.84967,39.02667 41.947271,47 -3.71115,13.17511 -6.565371,26.45929 -14.359381,38 -6.79824,10.06628 -19.58506,14.89142 -25.63085,25 -8.55961,14.31171 10.80377,35.84021 22.99023,41 -7.76263,13.65619 -2.66748,28.06934 6,40 -16.75201,4.75574 -32.00391,13.20911 -41.91016,28 -4.04439,6.03857 -10.08984,35.00003 -10.08984,35.00003 0.73996,17.18933 11.19315,31.43774 28,35.84375 5.58545,1.46423 11.59384,-0.034 17,1.51563 7.46317,2.13935 12.82004,7.58788 21.000001,8.46679 14.61435,1.57019 22.15723,-4.27673 35,-8.55273 5.18045,-1.72479 11.50067,-0.47602 17,-2.01953 16.11584,-4.52326 27.63513,-18.54358 29,-35.25391 h 189 62 c 9.63586,0 20.47174,-1.3974 29.98047,0.14844 5.76593,0.93732 5.29882,7.36761 6.76953,11.85156 2.12524,6.47961 6.01532,12.29822 11.25391,16.67188 10.24365,8.55249 19.32592,5.91601 30.99609,8.33984 11.38977,2.3656 18.29456,9.0495 31,8.98828 10.74072,-0.0518 16.58167,-5.38562 26,-8.70312 12.18762,-4.29297 23.00037,-0.55958 33.91016,-10.59766 4.86639,-4.4776 9.75097,-10.17407 10.39062,-16.69922 1.10258,-11.24762 2.44976,-8.28864 2.69922,-17 -2.20941,-27.75989 -24.41821,-49.84741 -51,-56 7.53101,-12.76996 13.98822,-25.80933 6,-40 5.39758,-2.40576 9.89489,-6.6167 13.82617,-11 6.91546,-7.71064 15.09205,-20.30194 9.7168,-31 -3.70251,-7.36883 -12.63825,-10.84333 -18.53906,-16.17383 -7.68042,-6.93811 -12.67999,-16.11719 -16,-25.82617 -1.61389,-4.71967 -5.77454,-13.03681 -3.80274,-17.99609 2.72962,-6.86524 12.64167,-11.77252 17.62891,-17.04297 11.06793,-11.69644 20.82727,-24.37955 29.47461,-37.96097 32.26672,-50.67773 46.81506,-121.49634 40.86523,-181.000001 -2.57141,-25.71619 -10.67242,-59.531556 -39.16992,-67.572266 -4.33841,-1.224106 -8.68094,-1.674556 -12.99219,-1.541015 z"
                     />
                     <path
-                            style="display:inline;opacity:1;fill:#ffe6d6;fill-opacity:1;stroke:none"
+                            style="
+                  display: inline;
+                  opacity: 1;
+                  fill: #ffe6d6;
+                  fill-opacity: 1;
+                  stroke: none;
+                "
                             d="m 579.16737,554.78178 c 2.46967,-9.23853 4.44415,-18.41895 2.10028,-28 -0.50439,-2.06171 -2.87414,-10.35126 -6.47217,-7.24847 -2.97961,2.56951 1.51282,16.1314 1.33252,20.24847 -0.83398,19.04663 -18.41211,28.2262 -35.96063,24.48224 -19.20605,-4.0976 -22.79352,-23.04218 -18.24768,-39.48151 0.52216,-1.88836 1.02899,-6.87695 -2.58722,-5.65503 -10.70996,3.61878 -4.2016,27.60431 -3.1651,34.6543 -29.21552,1.17371 -43.31226,-24.55817 -32.54633,-51 8.59882,-21.11914 32.86951,-36.72638 55.54633,-36.99615 25.90643,-0.30817 52.93567,4.69573 68.47687,27.99615 17.05096,25.56396 4.15039,60.91016 -28.47687,61 z"
                     />
                     <path
-                            style="display:inline;opacity:1;fill:#ffe6d6;fill-opacity:1;stroke:none"
+                            style="
+                  display: inline;
+                  opacity: 1;
+                  fill: #ffe6d6;
+                  fill-opacity: 1;
+                  stroke: none;
+                "
                             d="m 146.16737,554.78178 c 2.18011,-9.53259 4.19315,-18.23413 1.76001,-28 -0.52866,-2.12183 -3.49075,-10.49304 -7.05631,-7.24847 -2.56118,2.33062 2.48002,16.23944 2.20524,20.24847 -1.39176,20.30481 -21.65394,30.04578 -39.90894,23.28937 -13.406521,-4.96198 -17.746371,-19.16449 -15.384251,-32.28937 0.38614,-2.14557 4.46927,-12.36334 -0.50076,-11.88269 -3.16321,0.30585 -4.29733,5.45221 -4.95605,7.88269 -2.49228,9.19604 -0.38773,17.87488 0.84106,27 -29.62421,2.31836 -42.7892,-26.58398 -31.5602,-52 9.7025,-21.96094 35.23525,-35.41382 58.560201,-35.98535 24.78464,-0.6073 51.75824,7.5899 65.23996,29.98535 15.20459,25.25745 2.27457,58.91321 -29.23996,59"
                     />
                     <path
-                            style="display:inline;opacity:1;fill:#ffe6d6;fill-opacity:1;stroke:none"
+                            style="
+                  display: inline;
+                  opacity: 1;
+                  fill: #ffe6d6;
+                  fill-opacity: 1;
+                  stroke: none;
+                "
                             d="m 545.16737,458.78178 c -23.38428,0.0644 -46.12775,11.09644 -60.07562,30 -4.50745,6.10895 -7.41925,12.73413 -9.49689,20 -0.86169,3.01343 -1.13116,7.60803 -4.65509,8.68213 -7.6557,2.33325 -18.77484,0.31787 -26.7724,0.31787 h -60 -196 c -1.6297,-37.85413 -37.29495,-53.09308 -69,-59 0,-6.64111 -0.0156,-12.7821 2.6767,-19 2.24685,-5.18909 5.41858,-9.94043 9.36343,-13.98535 25.6868,-26.3382 55.31799,-9.82172 85.95987,-17.25385 22.32623,-5.41522 43.98938,-24.67138 58.40973,-41.7608 38.23285,-45.30933 31.43414,-107.7207 37.64044,-163 1.76022,-15.6781 3.8707,-31.55255 7.16049,-47 0.97184,-4.56329 2.1612,-13.28113 7.00309,-15.39661 11.40209,-4.98169 17.98272,2.47681 20.6311,12.39661 4.6029,17.24078 5.77942,35.35205 7.86963,53 5.29864,44.73737 -0.67749,94.45673 20.09417,136 8.12964,16.25928 20.79627,29.7746 34.19135,41.82947 11.66345,10.49652 26.40076,20.60126 42,23.88428 11.82025,2.48767 23.15967,-0.84449 35,-0.69526 22.0694,0.27814 46.46051,10.57819 55.66205,31.98151 2.6383,6.13684 2.33795,12.4668 2.33795,19"
                     />
                     <path
-                            style="display:inline;fill:#552200;stroke:none"
+                            style="display: inline; fill: #552200; stroke: none"
                             d="m 327.16737,423.78178 c -9.84048,18.44861 -36.18134,21.90448 -52.99924,10.63733 -5.14184,-3.44476 -10.39038,-16.81287 -16.94598,-15.30017 -7.13129,1.64551 -2.60089,11.76105 -0.37113,15.66284 5.52152,9.66193 16.32605,16.10107 27.31635,17 1.79382,13.89026 4.66379,28.76282 13.51776,40 15.86945,20.14099 47.3067,22.80725 66.47839,5.81482 8.08661,-7.16742 13.55921,-17.38519 16.10566,-27.81482 1.13549,-4.65063 0.53094,-11.67163 3.07721,-15.72223 2.25109,-3.58111 8.23065,-4.3316 11.82098,-6.06329 8.07593,-3.89514 20.15668,-14.79682 17.66742,-25.17053 -0.96582,-4.02509 -5.17566,-5.39228 -8.25232,-2.59485 -5.19623,4.72461 -6.99786,11.3435 -13.4151,15.41742 -15.48193,9.82849 -42.22827,5.8023 -50,-11.86652 17.42853,-4.90924 34.81445,-14.00616 40.21143,-33 7.55493,-26.58844 -26.65967,-43.36176 -48.21143,-42.94598 -26.89856,0.51892 -59.98386,23.87103 -41.77081,52.94598 2.72506,4.35028 5.92221,8.40259 9.77466,11.81482 7.54531,6.68304 16.53067,8.85217 25.99615,11.18518"
                     />
                     <path
-                            style="fill:#d35f5f;stroke:none"
+                            style="fill: #d35f5f; stroke: none"
                             d="m 329.16737,445.78178 c 0,4.29059 -2.5076,27.16034 4.94598,26.07874 6.8689,-0.99683 4.05402,-21.14594 4.05402,-26.07874 6.78137,1.93866 12.96051,4.88983 20,6.07947 2.57831,0.43573 7.20532,0.27521 8.97223,2.52313 2.61755,3.33014 1.23987,12.59943 0.26697,16.3974 -4.01313,15.66583 -17.69452,28.19 -34.2392,27.98145 -16.87054,-0.21265 -31.24158,-13.30628 -33.69907,-29.98145 -0.51751,-3.51166 -1.62164,-11.42389 0.72684,-14.39661 1.77826,-2.25097 6.39774,-1.89923 8.97223,-2.41125 6.92191,-1.37671 13.24451,-4.34448 20,-6.19214"
                     />
                     <path
-                            style="fill:#e9afaf;stroke:none"
+                            style="fill: #e9afaf; stroke: none"
                             d="m 117.16737,265.78178 c -12.29187,-8.66437 -19.836701,-24.38525 -25.396611,-38 -12.03805,-29.47809 -17.60339,-59.20612 -17.60339,-91 0,-12.93604 0.89212,-42.546331 17.00385,-46.581051 9.842071,-2.46467 20.509551,4.7572 27.996151,10.221491 19.28555,14.07611 34.30518,32.72724 46.14969,53.35956 3.81665,6.64832 14.40015,22.04254 10.78317,30 -4.91418,10.8114 -19.23236,19.64252 -26.73303,29 -13.32657,16.62561 -21.599,34.83423 -32.19983,53"
                     />
                     <path
-                            style="fill:#e9afaf;stroke:none"
+                            style="fill: #e9afaf; stroke: none"
                             d="m 548.16737,266.78178 c -7.17657,-21.21313 -19.09344,-41.52679 -33.00385,-59 -6.07763,-7.63428 -20.86602,-17.92047 -23.58953,-27 -2.219,-7.39758 9.10022,-22.12158 12.9375,-28 13.80859,-21.15381 31.62786,-42.18878 53.65588,-55.138921 7.55786,-4.44323 18.96368,-11.21557 27.99615,-7.20446 14.26819,6.33618 13.30396,32.494011 12.9892,45.343381 -0.83697,34.16766 -10.93542,68.61957 -26.23303,99 -5.47907,10.88123 -13.28113,26.6499 -24.75232,32"
                     />
                     <path
-                            style="fill:#fa914c;fill-opacity:1;stroke:none"
+                            style="fill: #fa914c; fill-opacity: 1; stroke: none"
                             d="m 317.16737,140.78178 c -4.5928,34.1062 -11.53299,67.4762 -13.91049,102 -2.45435,35.63965 -2.22568,75.93158 -22.43442,107 -14.64984,22.52228 -40.76193,49.16864 -68.65509,53.56097 -24.66724,3.88434 -48.86661,-6.18072 -72,7.90278 -11.35172,6.91088 -20.83871,17.93933 -25.30093,30.53625 -1.67582,4.73083 -1.09739,11.27917 -3.30167,15.56635 -1.56458,3.04296 -7.38239,2.92486 -10.21222,2.11578 -7.881221,-2.25354 -13.115631,-19.52979 -11.497681,-26.68213 0.87393,-3.8634 5.74335,-8.9425 3.57562,-12.82947 -5.80169,-10.40307 -19.80627,-14.47314 -23.61419,-27.17053 -3.24926,-10.83453 7.77581,-14.40436 14.35107,-20.18445 7.64307,-6.71875 12.90677,-14.68091 17.219151,-23.81555 9.25973,-19.61432 11.16436,-42.17523 16.66513,-63 4.41736,-16.72321 12.42178,-33.35217 21.54086,-48 8.44104,-13.55872 18.31455,-26.65442 29.57871,-37.99921 4.13656,-4.1662 14.60964,-9.92144 15.50463,-16.01544 1.19977,-8.169 -6.16998,-20.01288 -9.76696,-26.98535 -12.89414,-24.99426 -31.25766,-48.58276 -54.74152,-64.329471 -15.78461,-10.5841 -34.973541,-16.30426 -45.391201,4.32947 -7.0019,13.868291 -7.6088,29.806031 -7.6088,45.000001 0,33.36951 6.98386,67.02942 21.96915,97 4.16275,8.3255 9.01831,16.72473 14.838711,24 2.79804,3.49738 8.34796,7.47028 9.26312,12 1.96048,9.70374 -6.6224,24.58038 -7.07098,35 -17.577361,-8.14856 -30.602231,-30.97101 -40.199841,-47 -29.17644,-48.72766 -43.13329,-108.4187 -35.071,-165.000001 3.52374,-24.72968 10.4198,-67.132446 40.27084,-72.904297 16.33929,-3.159302 32.187101,4.705322 46.000001,12.624207 34.21176,19.61353 63.42892,53.86102 87.80017,84.280091 5.98679,7.47241 11.74118,15.1134 17.17438,23 2.37289,3.4444 4.60565,8.89197 8.23532,11.16437 5.27527,3.30261 18.13052,-4.07758 23.79013,-5.53473 20.25989,-5.21625 42.0246,-9.62726 63,-9.62964"
                     />
                     <path
-                            style="fill:#552200;stroke:none"
+                            style="fill: #552200; stroke: none"
                             d="m 223.16737,308.24937 c -38.00375,7.18195 -30.47116,80.48358 10,72.91357 38.19183,-7.14367 31.66357,-80.78717 -10,-72.91357"
                     />
                     <path
-                            style="fill:#ffffff;stroke:none"
+                            style="fill: #ffffff; stroke: none"
                             d="m 228.31311,336.73278 c 10.09216,-1.94611 12.34387,16.92108 2.94135,19.03009 -10.73648,2.4082 -13.00238,-17.08997 -2.94135,-19.03009"
                             id="eyeball-left"
                     />
                     <path
-                            style="fill:#fa914c;fill-opacity:1;stroke:none"
+                            style="fill: #fa914c; fill-opacity: 1; stroke: none"
                             d="m 559.16737,309.78178 c -1.73499,-8.94635 -9.04004,-25.34607 -7.09644,-34 1.91968,-8.54742 15.72016,-19.047 20.67127,-27 12.29321,-19.74658 21.26733,-42.33746 26.41437,-65 5.20306,-22.90918 8.63037,-46.55688 5.96063,-70 -1.17218,-10.29279 -4.62946,-23.155641 -13.95368,-29.005371 -13.01702,-8.16651 -30.23748,2.00879 -40.99615,9.59564 -27.42065,19.336671 -55.53741,51.049321 -66.36188,83.409731 -2.57519,7.69873 6.6283,12.37543 11.36109,17.01465 12.25287,12.01062 22.20837,26.33105 31.00079,40.98535 10.23248,17.05438 18.21307,35.53564 22.57483,55 4.37506,19.52362 5.62787,40.8653 14.69525,59 4.26984,8.53961 10.15961,16.45026 17.72992,22.32019 5.28992,4.10175 14.34485,7.86939 14.60107,15.67981 0.49799,15.18066 -18.45398,21.47882 -24.93902,32.17053 -2.62049,4.32038 3.58868,10.11884 3.94671,14.82947 0.50843,6.68976 -4.99365,21.84296 -11.79321,24.3573 -3.08899,1.14221 -7.55035,-0.28992 -10.81555,-0.3573 -0.0201,-30.34235 -25.70953,-52.99579 -55,-55.83026 -15.19971,-1.47089 -31.16443,3.16669 -46,-0.64813 -22.41473,-5.76374 -43.41205,-24.82038 -57.33099,-42.52161 -21.40631,-27.22321 -24.47998,-60.76019 -26.75849,-94 -2.87079,-41.88013 -4.81103,-84.31903 -15.91052,-125 20.31281,0.056 41.54065,4.7041 61,10.29089 5.82916,1.67353 18.41968,8.65625 23.90973,5.09027 10.61597,-6.89538 18.81183,-23.78369 27.24536,-33.38116 26.78082,-30.476751 55.94586,-59.725161 89.84491,-82.333314 15.58112,-10.391479 33.46802,-20.602661 53,-17.341064 32.27679,5.389831 34.14685,47.712467 37.42438,72.674377 1.96234,14.945071 -0.66199,31.087831 -2.25849,46.000001 -4.64013,43.34125 -17.13488,87.1496 -40.85803,124 -9.95215,15.45917 -23.78583,36.58301 -41.30786,44"
                     />
                     <path
-                            style="fill:#552200;stroke:none"
+                            style="fill: #552200; stroke: none"
                             d="m 437.16737,307.49321 c -39.89758,0.53106 -39.49432,74.20983 0,74.20983 39.9884,0 40.60052,-74.75024 0,-74.20983"
                     />
                     <path
-                            style="fill:#ffffff;stroke:none"
+                            style="fill: #ffffff; stroke: none"
                             d="m 436.08027,336.42389 c 10.89435,-3.10956 13.86847,15.76703 3.94135,18.14819 -10.69007,2.56415 -13.64105,-15.37958 -3.94135,-18.14819"
                             id="eyeball-right"
                     />
@@ -1584,7 +1808,11 @@
                     </article>
 
                     <article class="why-us-card">
-                        <img src="./assets/gifs/report.gif" alt="Raport" loading="lazy"/>
+                        <img
+                                src="./assets/gifs/report.gif"
+                                alt="Raport"
+                                loading="lazy"
+                        />
                         <div class="heading2B">Historia leczenia</div>
                         <div class="body text-neutral">
                             Wszystkie dane medyczne Twojego pupila w jednym miejscu
@@ -1618,7 +1846,11 @@
                     </article>
 
                     <article class="why-us-card">
-                        <img src="./assets/gifs/rating.gif" alt="Oceny" loading="lazy"/>
+                        <img
+                                src="./assets/gifs/rating.gif"
+                                alt="Oceny"
+                                loading="lazy"
+                        />
                         <div class="heading2B">System ocen</div>
                         <div class="body text-neutral">
                             Sprawdź opinie o weterynarzu i oceń swoje wizyty - łatwiej
@@ -1701,9 +1933,7 @@
                         <li>Informacje o zwierzęciu</li>
                     </ul>
                     <div class="cta-row" style="margin-top: 12px">
-                        <a class="btn secondary"
-                        >Dołącz jako specjalista</a
-                        >
+                        <a class="btn secondary">Dołącz jako specjalista</a>
                     </div>
                 </div>
             </div>
@@ -1817,7 +2047,7 @@
     <div class="container grid">
         <div>
             <div class="brand" style="margin-bottom: 0.5rem">
-                <img src="./assets/images/logo2.svg">
+                <img src="./assets/images/logo2.svg" />
                 <span>Zoovi</span>
             </div>
             <p>
@@ -1852,7 +2082,7 @@
               gap: 0.35rem;
             "
             >
-                <li><a href="#jak">Jak działa</a></li>
+                <li><a href="#jak">Jak to działa</a></li>
                 <li><a href="#uslugi">Usługi</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
@@ -1874,16 +2104,7 @@
             </ul>
         </div>
     </div>
-    <div
-            class="container"
-            style="
-          margin-top: 18px;
-          display: flex;
-          justify-content: space-between;
-          gap: 12px;
-          flex-wrap: wrap;
-        "
-    >
+    <div class="container footer-bottom">
         <small
         >© <span id="year"></span> Zoovi. Wszelkie prawa zastrzeżone.</small
         >
@@ -1899,7 +2120,7 @@
                 const el = document.querySelector(href);
                 if (el) {
                     e.preventDefault();
-                    el.scrollIntoView({behavior: "smooth", block: "start"});
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
                     // Close mobile menu if open
                     mobileMenu.classList.remove("open");
                     burger.setAttribute("aria-expanded", "false");
@@ -1931,7 +2152,7 @@
                     }
                 });
             },
-            {threshold: 0.15}
+            { threshold: 0.15 }
         );
         revealEls.forEach((el) => io.observe(el));
     } else {
@@ -1939,69 +2160,69 @@
     }
 
     // Current year in footer
-    document.getElementById("year").textContent = new Date().getFullYear().toString();
-
+    document.getElementById("year").textContent = new Date()
+        .getFullYear()
+        .toString();
 
     // ### Interactive Corgi Section ###
 
-    const leftEyeCenter = {x: 238, y: 324}
-    const rightEyeCenter = {x: 426, y: 324}
-    const maxRadius = 15
+    const leftEyeCenter = { x: 238, y: 324 };
+    const rightEyeCenter = { x: 426, y: 324 };
+    const maxRadius = 15;
 
-    const svgRef = document.getElementById('corgi-svg')
-    const leftEyeball = document.getElementById('eyeball-left')
-    const rightEyeball = document.getElementById('eyeball-right')
+    const svgRef = document.getElementById("corgi-svg");
+    const leftEyeball = document.getElementById("eyeball-left");
+    const rightEyeball = document.getElementById("eyeball-right");
 
-
-    let pendingEvt = null
-    let rafId = 0
+    let pendingEvt = null;
+    let rafId = 0;
 
     function getSVGPointFromClientCoordinates(clientX, clientY) {
-        const svg = svgRef
-        if (!svg) return null
-        const ctm = svg.getScreenCTM()
-        if (!ctm) return null
-        const inv = ctm.inverse()
-        const pt = new DOMPoint(clientX, clientY).matrixTransform(inv)
-        return {x: pt.x, y: pt.y}
+        const svg = svgRef;
+        if (!svg) return null;
+        const ctm = svg.getScreenCTM();
+        if (!ctm) return null;
+        const inv = ctm.inverse();
+        const pt = new DOMPoint(clientX, clientY).matrixTransform(inv);
+        return { x: pt.x, y: pt.y };
     }
 
     function moveEyeball(eyeballElement, eyeCenter, svgCoordinatesPoint) {
-        if (!eyeballElement || !svgCoordinatesPoint) return
-        const dx = svgCoordinatesPoint.x - eyeCenter.x
-        const dy = svgCoordinatesPoint.y - eyeCenter.y
-        const distance = Math.hypot(dx, dy)
-        const angle = Math.atan2(dy, dx)
-        const move = Math.min(distance, maxRadius)
-        eyeballElement.setAttribute('transform', `translate(${Math.cos(angle) * move}, ${Math.sin(angle) * move})`)
+        if (!eyeballElement || !svgCoordinatesPoint) return;
+        const dx = svgCoordinatesPoint.x - eyeCenter.x;
+        const dy = svgCoordinatesPoint.y - eyeCenter.y;
+        const distance = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx);
+        const move = Math.min(distance, maxRadius);
+        eyeballElement.setAttribute(
+            "transform",
+            `translate(${Math.cos(angle) * move}, ${Math.sin(angle) * move})`
+        );
     }
 
     function onPointerMove(evt) {
-        pendingEvt = evt
-        if (!rafId) rafId = requestAnimationFrame(flush)
+        pendingEvt = evt;
+        if (!rafId) rafId = requestAnimationFrame(flush);
     }
 
     function flush() {
         if (!pendingEvt) {
             rafId = 0;
-            return
+            return;
         }
-        const {clientX, clientY} = pendingEvt
-        pendingEvt = null
+        const { clientX, clientY } = pendingEvt;
+        pendingEvt = null;
 
-        const p = getSVGPointFromClientCoordinates(clientX, clientY)
-        moveEyeball(leftEyeball, leftEyeCenter, p)
-        moveEyeball(rightEyeball, rightEyeCenter, p)
+        const p = getSVGPointFromClientCoordinates(clientX, clientY);
+        moveEyeball(leftEyeball, leftEyeCenter, p);
+        moveEyeball(rightEyeball, rightEyeCenter, p);
 
-        rafId = 0
+        rafId = 0;
     }
 
-    window.addEventListener('pointermove', onPointerMove, {passive: true})
-    window.addEventListener('mousemove', onPointerMove, {passive: true})
-    window.addEventListener('scroll', onPointerMove, {passive: true})
-
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("mousemove", onPointerMove, { passive: true });
+    window.addEventListener("scroll", onPointerMove, { passive: true });
 </script>
 </body>
 </html>
-
-
